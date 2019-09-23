@@ -34,6 +34,11 @@ var generateYCoordinate = function () {
   return Math.round(Math.random() * (maxYBlock - minYBlock)) + minYBlock;
 };
 
+var generatePrice = function () {
+  var maxPrice = 1000000;
+  return Math.ceil(Math.random() * maxPrice);
+};
+
 var generateRandomType = function () {
   return types[Math.floor(Math.random() * types.length)];
 };
@@ -65,6 +70,7 @@ var generatePin = function () {
       'offer': {
         'title': titles[i],
         'address': '600, 300',
+        'price': generatePrice() + '$',
         'type': generateRandomType(),
         'rooms': genarateRoom(),
         'guests': generateGuest(),
