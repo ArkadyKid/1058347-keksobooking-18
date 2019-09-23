@@ -16,7 +16,7 @@ var pins = [];
 
 var generateAvatar = function () {
   for (var i = 0; i < ARR_LENGTH; i++) {
-    avatars[i] = 'img/avatars/user' + '0' + (i + 1) + '.png'
+    avatars[i] = 'img/avatars/user' + '0' + (i + 1) + '.png';
   }
   return avatars;
 };
@@ -78,7 +78,7 @@ var generatePin = function () {
         'x': generateXCoordinate(),
         'y': generateYCoordinate(),
       }
-    }
+    };
   }
   return pins;
 };
