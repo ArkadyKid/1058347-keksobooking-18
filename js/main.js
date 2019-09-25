@@ -136,14 +136,14 @@ var renderCards = function (card) {
 
   cardElement.querySelector('.popup__description').textContent = card.offer.description;
 
-  for (var i = 1; i < card.offer.photos.length; i++) {
+  for (var j = 1; j < card.offer.photos.length; j++) {
     var popupPhotoCloneElement = cardElement.querySelector('.popup__photo').cloneNode();
     popupPhotosElement.appendChild(popupPhotoCloneElement);
   }
 
-  for (var i = 0; i < card.offer.photos.length; i++) {
+  for (var k = 0; k < card.offer.photos.length; k++) {
     var popupPhotoElement = cardElement.querySelectorAll('.popup__photo');
-    popupPhotoElement[i].src = card.offer.photos[i];
+    popupPhotoElement[k].src = card.offer.photos[k];
   }
 
   cardElement.querySelector('.popup__avatar').src = card.author.avatar;
