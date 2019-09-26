@@ -140,19 +140,12 @@ var renderCards = function (card) {
 
   cardElement.querySelector('.popup__description').textContent = card.offer.description;
 
-  // for (var j = 1; j < card.offer.photos.length; j++) {
-  //   var popupPhotoCloneElement = cardElement.querySelector('.popup__photo').cloneNode();
-  //   popupPhotosElement.appendChild(popupPhotoCloneElement);
-  // }
-
-  for (var j = 0; j < card.offer.photos.length; j++) {
+  for (var j = 1; j < card.offer.photos.length; j++) {
     var popupPhotoCloneElement = cardElement.querySelector('.popup__photo').cloneNode();
     var popupPhotoElement = cardElement.querySelectorAll('.popup__photo');
-    popupPhotoElement[j].src = card.offer.photos[j];
+    popupPhotoElement[j-1].src = card.offer.photos[j-1];
     popupPhotosElement.appendChild(popupPhotoCloneElement);
   }
-
-  popupPhotosElement.parentElement.removeChild(popupPhotoElement);
 
   cardElement.querySelector('.popup__avatar').src = card.author.avatar;
   return cardElement;
