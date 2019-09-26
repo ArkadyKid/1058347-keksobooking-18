@@ -143,7 +143,7 @@ var renderCards = function (card) {
   for (var j = 1; j < card.offer.photos.length; j++) {
     var popupPhotoCloneElement = cardElement.querySelector('.popup__photo').cloneNode();
     var popupPhotoElement = cardElement.querySelectorAll('.popup__photo');
-    popupPhotoElement[j-1].src = card.offer.photos[j-1];
+    popupPhotoElement[j - 1].src = card.offer.photos[j - 1];
     popupPhotosElement.appendChild(popupPhotoCloneElement);
   }
 
