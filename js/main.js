@@ -4,13 +4,12 @@ var ARR_LENGTH = 8;
 var PIN_HEIGHT = 70;
 var PIN_HALF_WIDTH = 50 / 2;
 var ENTER_KEY_CODE = 13;
-var ESC_KEY_CODE = 27;
+// var ESC_KEY_CODE = 27;
 var pinFragment = document.createDocumentFragment();
 var cardFragment = document.createDocumentFragment();
 var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 var mapElement = document.querySelector('.map');
-var mapFilterElement = mapElement.querySelector('.map__filters-container');
 var mapPinsElement = mapElement.querySelector('.map__pins');
 var mapPinMainElement = mapPinsElement.querySelector('.map__pin--main');
 var adFormElement = document.querySelector('.ad-form');
@@ -49,14 +48,14 @@ var generateXCoordinate = function () {
 };
 
 var generateYCoordinate = function () {
-  var maxYBlock = 630;
-  var minYBlock = 130;
-  return Math.round(Math.random() * (maxYBlock - minYBlock)) + minYBlock;
+  var MAX_Y_BLOCK = 630;
+  var MIN_Y_BLOCK = 130;
+  return Math.round(Math.random() * (MAX_Y_BLOCK - MIN_Y_BLOCK)) + MIN_Y_BLOCK;
 };
 
 var generatePrice = function () {
-  var maxPrice = 1000000;
-  return Math.ceil(Math.random() * maxPrice);
+  var MAX_PRICE = 1000000;
+  return Math.ceil(Math.random() * MAX_PRICE);
 };
 
 var generateRandomType = function () {
@@ -64,13 +63,13 @@ var generateRandomType = function () {
 };
 
 var generateRoom = function () {
-  var maxRooms = 100;
-  return Math.ceil(Math.random() * maxRooms);
+  var MAX_ROOMS = 100;
+  return Math.ceil(Math.random() * MAX_ROOMS);
 };
 
 var generateGuest = function () {
-  var maxGuest = 10;
-  return Math.round(Math.random() * maxGuest);
+  var MAX_GUESTS = 10;
+  return Math.round(Math.random() * MAX_GUESTS);
 };
 
 var generateCheckin = function () {
