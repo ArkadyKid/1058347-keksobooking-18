@@ -12,9 +12,10 @@ var cardTemplate = document.querySelector('#card').content.querySelector('.map__
 var mapElement = document.querySelector('.map');
 var mapPinsElement = mapElement.querySelector('.map__pins');
 var mapPinMainElement = mapPinsElement.querySelector('.map__pin--main');
+var mapFilterElement = mapElement.querySelector('.map__filters-container');
 var adFormElement = document.querySelector('.ad-form');
 var adFormFieldsetList = adFormElement.querySelectorAll('.ad-form fieldset');
-var mapFiltersElement = document.querySelector('.map__filters');
+var mapFiltersElement = mapElement.querySelector('.map__filters');
 var mapFiltersSelectList = mapFiltersElement.querySelectorAll('.map__filters select');
 var mapFiltersFieldsetElement = mapFiltersElement.querySelector('.map__filters fieldset');
 var addressInputElement = adFormElement.querySelector('#address');
@@ -177,6 +178,10 @@ for (var i = 0; i < ARR_LENGTH; i++) {
   pinFragment.appendChild(renderPins(pins[i]));
 }
 
+// mapPinsElement.appendChild(pinFragment);
+// mapElement.insertBefore(cardFragment, mapFilterElement);
+// mapElement.classList.remove('map--faded');
+
 var addDisabledAttribute = function (element) {
   element.setAttribute('disabled', 'disabled');
 };
@@ -210,9 +215,9 @@ var setInactiveWindow = function () {
 window.addEventListener('load', function () {
   setInactiveWindow();
   if (roomNumberElement.value === '1') {
-    capacityOptionElement[0].setAttribute('disabled', 'disabled');
-    capacityOptionElement[1].setAttribute('disabled', 'disabled');
-    capacityOptionElement[3].setAttribute('disabled', 'disabled');
+    addDisabledAttribute(capacityOptionElement[0]);
+    addDisabledAttribute(capacityOptionElement[1]);
+    addDisabledAttribute(capacityOptionElement[3]);
     capacityElement.value = '1';
   }
 });
@@ -229,31 +234,33 @@ mapPinMainElement.addEventListener('keydown', function (evt) {
 
 roomNumberElement.addEventListener('change', function () {
   if (roomNumberElement.value === '100') {
-    capacityOptionElement[0].setAttribute('disabled', 'disabled');
-    capacityOptionElement[1].setAttribute('disabled', 'disabled');
-    capacityOptionElement[2].setAttribute('disabled', 'disabled');
-    capacityOptionElement[3].removeAttribute('disabled');
+    addDisabledAttribute(capacityOptionElement[0]);
+    addDisabledAttribute(capacityOptionElement[1]);
+    addDisabledAttribute(capacityOptionElement[2]);
+    removeDisabledAttribute(capacityOptionElement[3]);
     capacityElement.value = '0';
   }
   if (roomNumberElement.value === '1') {
-    capacityOptionElement[0].setAttribute('disabled', 'disabled');
-    capacityOptionElement[1].setAttribute('disabled', 'disabled');
-    capacityOptionElement[3].setAttribute('disabled', 'disabled');
-    capacityOptionElement[2].removeAttribute('disabled');
+    addDisabledAttribute(capacityOptionElement[0]);
+    addDisabledAttribute(capacityOptionElement[1]);
+    addDisabledAttribute(capacityOptionElement[3]);
+    removeDisabledAttribute(capacityOptionElement[2]);
     capacityElement.value = '1';
   }
   if (roomNumberElement.value === '2') {
-    capacityOptionElement[0].setAttribute('disabled', 'disabled');
-    capacityOptionElement[2].removeAttribute('disabled');
-    capacityOptionElement[3].setAttribute('disabled', 'disabled');
-    capacityOptionElement[1].removeAttribute('disabled');
+    addDisabledAttribute(capacityOptionElement[0]);
+    removeDisabledAttribute(capacityOptionElement[2]);
+    addDisabledAttribute(capacityOptionElement[3]);
+    removeDisabledAttribute(capacityOptionElement[1]);
     capacityElement.value = '2';
   }
   if (roomNumberElement.value === '3') {
-    capacityOptionElement[3].setAttribute('disabled', 'disabled');
-    capacityOptionElement[1].removeAttribute('disabled');
-    capacityOptionElement[0].removeAttribute('disabled');
-    capacityOptionElement[2].removeAttribute('disabled');
+    addDisabledAttribute(capacityOptionElement[3]);
+    removeDisabledAttribute(capacityOptionElement[1]);
+    removeDisabledAttribute(capacityOptionElement[0]);
+    removeDisabledAttribute(capacityOptionElement[2]);
     capacityElement.value = '3';
   }
 });
+
+
