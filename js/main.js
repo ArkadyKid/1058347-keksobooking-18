@@ -13,15 +13,20 @@ var mapElement = document.querySelector('.map');
 var mapFilterElement = mapElement.querySelector('.map__filters-container');
 var mapPinsElement = mapElement.querySelector('.map__pins');
 var mapPinMainElement = mapPinsElement.querySelector('.map__pin--main');
-var adFormFieldsetList = document.querySelectorAll('.ad-form fieldset');
-var mapFiltersSelectList = document.querySelectorAll('.map__filters select');
-var mapFiltersFieldsetElement = document.querySelector('.map__filters fieldset');
-var addressInputElement = document.querySelector('#address');
-var houseRoomsSelectElement = document.querySelector('#housing-rooms');
-var houseGuestsSelectElement = document.querySelector('#housing-guests');
-var MAIN_PIN_WIDTH = mapPinMainElement.offsetWidth;
-var MAIN_PIN_HEIGHT = mapPinMainElement.offsetHeight;
-var MAIN_PIN_HEIGHT_CURSOR = mapPinMainElement.offsetHeight + 22;
+var adFormElement = document.querySelector('.ad-form');
+var adFormFieldsetList = adFormElement.querySelectorAll('.ad-form fieldset');
+var mapFiltersElement = document.querySelector('.map__filters');
+var mapFiltersSelectList = mapFiltersElement.querySelectorAll('.map__filters select');
+var mapFiltersFieldsetElement = mapFiltersElement.querySelector('.map__filters fieldset');
+var addressInputElement = adFormElement.querySelector('#address');
+var roomNumberElement = adFormElement.querySelector('#room_number');
+var capacityElement = adFormElement.querySelector('#capacity');
+var capacityOptionElement = capacityElement.querySelectorAll('option');
+var coordsY = mapPinMainElement.offsetTop;
+var coordsX = mapPinMainElement.offsetLeft;
+var mainPinWidth = mapPinMainElement.offsetWidth;
+var mainPinHeight = mapPinMainElement.offsetHeight;
+var mainPinHeightCursor = mapPinMainElement.offsetHeight + 22;
 var titles = ['Отличное предложение', 'Выгодное предложение', 'Дешевое предложение', 'Уникальное предложение', 'Недорогое предложение', 'Суперпредложение', 'Суперпуперпредложение', 'Мегапредложение'];
 var types = ['palace', 'flat', 'house', 'bungalo'];
 var timeins = ['12:00', '13:00', '14:00'];
@@ -189,24 +194,28 @@ var doIterationCycle = function (elements, doSomething) {
 
 var setActiveWindow = function () {
   mapElement.classList.remove('map--faded');
+  adFormElement.classList.remove('ad-form--disabled');
   removeDisabledAttribute(mapFiltersFieldsetElement);
   doIterationCycle(adFormFieldsetList, removeDisabledAttribute);
   doIterationCycle(mapFiltersSelectList, removeDisabledAttribute);
-  addressInputElement.value = (coordsX + Math.round(MAIN_PIN_WIDTH / 2)) + ' ' + (coordsY + MAIN_PIN_HEIGHT_CURSOR);
+  addressInputElement.value = (coordsX + Math.round(mainPinWidth / 2)) + ' ' + (coordsY + mainPinHeightCursor);
 };
 
 var setInactiveWindow = function () {
   doIterationCycle(adFormFieldsetList, addDisabledAttribute);
   doIterationCycle(mapFiltersSelectList, addDisabledAttribute);
   addDisabledAttribute(mapFiltersFieldsetElement);
-  addressInputElement.value = (coordsX + Math.round(MAIN_PIN_WIDTH / 2)) + ' ' + (coordsY + Math.round(MAIN_PIN_HEIGHT / 2));
+  addressInputElement.value = (coordsX + Math.round(mainPinWidth / 2)) + ' ' + (coordsY + Math.round(mainPinHeight / 2));
 };
-
-var coordsY = mapPinMainElement.offsetTop;
-var coordsX = mapPinMainElement.offsetLeft;
 
 window.addEventListener('load', function () {
   setInactiveWindow();
+  if (roomNumberElement.value === '1') {
+    capacityOptionElement[0].setAttribute('disabled', 'disabled');
+    capacityOptionElement[1].setAttribute('disabled', 'disabled');
+    capacityOptionElement[3].setAttribute('disabled', 'disabled');
+    capacityElement.value = '1';
+  }
 });
 
 mapPinMainElement.addEventListener('mousedown', function () {
@@ -219,11 +228,33 @@ mapPinMainElement.addEventListener('keydown', function (evt) {
   }
 });
 
-// var houseRoomsSelectElement = mapElement.querySelector('#housing-rooms');
-// var houseGuestsSelectElement = mapElement.querySelector('#housing-guests');
-//
-houseRoomsSelectElement.addEventListener('click', function () {
-  if (houseRoomsSelectElement.value === 'any') {
-    houseRoomsSelectElement.setCustomValidity('Вы можете выбрать все комнаты');
+roomNumberElement.addEventListener('change', function () {
+  if (roomNumberElement.value === '100') {
+    capacityOptionElement[0].setAttribute('disabled', 'disabled');
+    capacityOptionElement[1].setAttribute('disabled', 'disabled');
+    capacityOptionElement[2].setAttribute('disabled', 'disabled');
+    capacityOptionElement[3].removeAttribute('disabled');
+    capacityElement.value = '0';
+  }
+  if (roomNumberElement.value === '1') {
+    capacityOptionElement[0].setAttribute('disabled', 'disabled');
+    capacityOptionElement[1].setAttribute('disabled', 'disabled');
+    capacityOptionElement[3].setAttribute('disabled', 'disabled');
+    capacityOptionElement[2].removeAttribute('disabled');
+    capacityElement.value = '1';
+  }
+  if (roomNumberElement.value === '2') {
+    capacityOptionElement[0].setAttribute('disabled', 'disabled');
+    capacityOptionElement[2].removeAttribute('disabled');
+    capacityOptionElement[3].setAttribute('disabled', 'disabled');
+    capacityOptionElement[1].removeAttribute('disabled');
+    capacityElement.value = '2';
+  }
+  if (roomNumberElement.value === '3') {
+    capacityOptionElement[3].setAttribute('disabled', 'disabled');
+    capacityOptionElement[1].removeAttribute('disabled');
+    capacityOptionElement[0].removeAttribute('disabled');
+    capacityOptionElement[2].removeAttribute('disabled');
+    capacityElement.value = '3';
   }
 });
