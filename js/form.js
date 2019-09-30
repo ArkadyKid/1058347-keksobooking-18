@@ -71,4 +71,4 @@
       capacityElement.value = '1';
     }
   });
-}) ();
+})();
