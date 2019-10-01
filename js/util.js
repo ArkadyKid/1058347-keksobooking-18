@@ -21,6 +21,6 @@
     ENTER_KEY_CODE: ENTER_KEY_CODE,
     ESC_KEY_CODE: ESC_KEY_CODE,
     mapElement: mapElement,
-    doIterationCycle: doIterationCycle
+    doIterationCycle: doIterationCycle;
   }
-}) ();
+})();

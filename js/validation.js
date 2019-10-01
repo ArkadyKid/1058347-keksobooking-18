@@ -35,7 +35,7 @@
 
   var compareTime = function (value, handleTime, changeTime) {
     if (handleTime.value === value) {
-      changeTime.value = value
+      changeTime.value = value;
     }
   };
 
@@ -72,22 +72,22 @@
 
   titleElement.addEventListener('invalid', function () {
     if (titleElement.validity.tooShort) {
-      titleElement.setCustomValidity('минимальная длина 30 символов')
+      titleElement.setCustomValidity('минимальная длина 30 символов');
     } else if (titleElement.validity.tooLong) {
-      titleElement.setCustomValidity('максимальная длина 100 символов')
+      titleElement.setCustomValidity('максимальная длина 100 символов');
     } else if (titleElement.validity.valueMissing) {
-      titleElement.setCustomValidity('обязательное поле')
+      titleElement.setCustomValidity('обязательное поле');
     } else {
-      titleElement.setCustomValidity('')
+      titleElement.setCustomValidity('');
     }
   });
 
   titleElement.addEventListener('input', function (evt) {
     var target = evt.target;
     if (target.value.length < 30) {
-      titleElement.setCustomValidity('минимальная длина 30 символов, сейчас длина ' + (target.value.length))
+      titleElement.setCustomValidity('минимальная длина 30 символов, сейчас длина ' + (target.value.length));
     } else {
-      titleElement.setCustomValidity('')
+      titleElement.setCustomValidity('');
     }
   });
 
@@ -95,9 +95,9 @@
 
   priceElement.addEventListener('invalid', function () {
     if (priceElement.validity.rangeUnderflow) {
-      priceElement.setCustomValidity('минимальная цена ' + priceElement.min + ' руб')
+      priceElement.setCustomValidity('минимальная цена ' + priceElement.min + ' руб');
     } else {
-      priceElement.setCustomValidity('')
+      priceElement.setCustomValidity('');
     }
   });
 

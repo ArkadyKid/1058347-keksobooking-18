@@ -17,7 +17,7 @@
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === window.util.ESC_KEY_CODE) {
       for (var i = 0; i < pins.length; i++) {
-        addCloseAttribute(i)
+        addCloseAttribute(i);
       }
     }
     removeOnEscPress();
