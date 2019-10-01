@@ -12,6 +12,11 @@
   var roomNumberElement = adFormElement.querySelector('#room_number');
   var capacityElement = adFormElement.querySelector('#capacity');
   var capacityOptionElement = capacityElement.querySelectorAll('option');
+  var titleElement = adFormElement.querySelector('#title');
+  var priceElement = adFormElement.querySelector('#price');
+  var typeElement = adFormElement.querySelector('#type');
+  var timeInElement = adFormElement.querySelector('#timein');
+  var timeOutElement = adFormElement.querySelector('#timeout');
   var coordsY = mapPinMainElement.offsetTop;
   var coordsX = mapPinMainElement.offsetLeft;
   var mainPinWidth = mapPinMainElement.offsetWidth;
@@ -32,6 +37,11 @@
     capacityOptionElement: capacityOptionElement,
     mapPinsElement: mapPinsElement,
     mapFiltersElement: mapFiltersElement,
+    titleElement: titleElement,
+    priceElement: priceElement,
+    typeElement: typeElement,
+    timeInElement: timeInElement,
+    timeOutElement: timeOutElement,
     addDisabledAttribute: addDisabledAttribute,
     removeDisabledAttribute: removeDisabledAttribute
   };
@@ -69,6 +79,8 @@
       addDisabledAttribute(capacityOptionElement[1]);
       addDisabledAttribute(capacityOptionElement[3]);
       capacityElement.value = '1';
+      priceElement.placeholder = '1000';
+      priceElement.min = 1000;
     }
   });
 })();

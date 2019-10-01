@@ -7,6 +7,7 @@
   var ENTER_KEY_CODE = 13;
   var ESC_KEY_CODE = 27;
   var mapElement = document.querySelector('.map');
+
   var doIterationCycle = function (elements, doSomething) {
     for (var i = 0; i < elements.length; i++) {
       doSomething(elements[i]);
