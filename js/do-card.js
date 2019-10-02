@@ -36,7 +36,7 @@
   };
 
   var showCard = function (element) {
-    pins[element].addEventListener('click', function (evt) {
+    pins[element].addEventListener('click', function () {
       iteratePopups(element);
       addOnEscPress();
     });
