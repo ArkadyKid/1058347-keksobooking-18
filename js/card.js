@@ -62,6 +62,6 @@
     cardFragment.appendChild(renderCards(window.pin.pins[j]));
   }
 
-  window.util.mapElement.insertBefore(cardFragment, window.pin.mapFilterElement);
+  window.util.mapElement.insertBefore(cardFragment, window.pin.mapFiltersElement);
 
 })();

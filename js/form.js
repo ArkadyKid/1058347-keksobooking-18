@@ -17,6 +17,7 @@
   var typeElement = adFormElement.querySelector('#type');
   var timeInElement = adFormElement.querySelector('#timein');
   var timeOutElement = adFormElement.querySelector('#timeout');
+  var pins = document.querySelectorAll('.map__pin:not(.map__pin--main');
   var coordsY = mapPinMainElement.offsetTop;
   var coordsX = mapPinMainElement.offsetLeft;
   var mainPinWidth = mapPinMainElement.offsetWidth;
@@ -42,8 +43,15 @@
     typeElement: typeElement,
     timeInElement: timeInElement,
     timeOutElement: timeOutElement,
+    pins: pins,
     addDisabledAttribute: addDisabledAttribute,
     removeDisabledAttribute: removeDisabledAttribute
+  };
+
+  var showPins = function () {
+    for (var i = 0; i < pins.length; i++) {
+      pins[i].style.display = null;
+    }
   };
 
   var setActiveWindow = function () {
@@ -53,7 +61,7 @@
     window.util.doIterationCycle(adFormFieldsetList, removeDisabledAttribute);
     window.util.doIterationCycle(mapFiltersSelectList, removeDisabledAttribute);
     addressInputElement.value = (coordsX + Math.round(mainPinWidth / 2)) + ' ' + (coordsY + mainPinHeightCursor);
-    window.form.mapPinsElement.appendChild(window.pin.pinFragment);
+    showPins();
   };
 
   var setInactiveWindow = function () {

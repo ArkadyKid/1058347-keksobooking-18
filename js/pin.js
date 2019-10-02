@@ -3,7 +3,8 @@
 (function () {
   var pinFragment = document.createDocumentFragment();
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
-  var mapFilterElement = window.util.mapElement.querySelector('.map__filters-container');
+  var mapPinsElement = window.util.mapElement.querySelector('.map__pins');
+  var mapFiltersElement = window.util.mapElement.querySelector('.map__filters-container');
   var titles = ['Отличное предложение', 'Выгодное предложение', 'Дешевое предложение', 'Уникальное предложение', 'Недорогое предложение', 'Суперпредложение', 'Суперпуперпредложение', 'Мегапредложение'];
   var types = ['palace', 'flat', 'house', 'bungalo'];
   var timeins = ['12:00', '13:00', '14:00'];
@@ -14,7 +15,7 @@
   window.pin = {
     pinTemplate: pinTemplate,
     pins: pins,
-    mapFilterElement: mapFilterElement,
+    mapFiltersElement: mapFiltersElement,
     pinFragment: pinFragment
   };
 
@@ -101,6 +102,7 @@
     pinElement.querySelector('img').alt = pin.offer.title;
     pinElement.style.left = pin.location.x - window.util.PIN_HALF_WIDTH + 'px';
     pinElement.style.top = pin.location.y - window.util.PIN_HEIGHT + 'px';
+    pinElement.style.display = 'none';
     return pinElement;
   };
 
@@ -108,4 +110,5 @@
     pinFragment.appendChild(renderPins(pins[i]));
   }
 
+  mapPinsElement.appendChild(window.pin.pinFragment);
 })();

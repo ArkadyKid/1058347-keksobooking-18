@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var pins = document.querySelectorAll('.map__pin:not(.map__pin--main');
+  var pins = window.form.pins;
   var popups = document.querySelectorAll('.popup');
   var popupCloseElements = document.querySelectorAll('.popup__close');
 
@@ -36,7 +36,7 @@
   };
 
   var showCard = function (element) {
-    pins[element].addEventListener('click', function () {
+    pins[element].addEventListener('click', function (evt) {
       iteratePopups(element);
       addOnEscPress();
     });
