@@ -14,7 +14,8 @@
   window.pin = {
     pinTemplate: pinTemplate,
     pins: pins,
-    mapFilterElement: mapFilterElement
+    mapFilterElement: mapFilterElement,
+    pinFragment: pinFragment
   };
 
   var generateAvatar = function () {
@@ -107,5 +108,4 @@
     pinFragment.appendChild(renderPins(pins[i]));
   }
 
-  window.form.mapPinsElement.appendChild(pinFragment);
 })();

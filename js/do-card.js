@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-
   var pins = document.querySelectorAll('.map__pin:not(.map__pin--main');
   var popups = document.querySelectorAll('.popup');
   var popupCloseElements = document.querySelectorAll('.popup__close');

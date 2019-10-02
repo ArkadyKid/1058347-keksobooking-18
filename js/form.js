@@ -53,6 +53,7 @@
     window.util.doIterationCycle(adFormFieldsetList, removeDisabledAttribute);
     window.util.doIterationCycle(mapFiltersSelectList, removeDisabledAttribute);
     addressInputElement.value = (coordsX + Math.round(mainPinWidth / 2)) + ' ' + (coordsY + mainPinHeightCursor);
+    window.form.mapPinsElement.appendChild(window.pin.pinFragment);
   };
 
   var setInactiveWindow = function () {
