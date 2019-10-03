@@ -10,10 +10,10 @@
         y: evt.clientY
       };
 
-      var getCoords = function (evt) {
+      var getCoords = function (mouseEvt) {
         var shift = {
-          x: startCoords.x - evt.clientX,
-          y: startCoords.y - evt.clientY
+          x: startCoords.x - mouseEvt.clientX,
+          y: startCoords.y - mouseEvt.clientY
         };
 
         var coordsX = element.offsetLeft - shift.x;
@@ -27,8 +27,8 @@
         };
 
         startCoords = {
-          x: evt.clientX,
-          y: evt.clientY
+          x: mouseEvt.clientX,
+          y: mouseEvt.clientY
         };
 
         if (coordsX < limitsSizeBlock.right && coordsX > limitsSizeBlock.left && coordsY > limitsSizeBlock.top && coordsY < limitsSizeBlock.bottom) {
@@ -67,5 +67,5 @@
       document.addEventListener('mouseup', onMouseUp);
     });
     element.addEventListener('mousemove', someFunction);
-  }
+  };
 })();
