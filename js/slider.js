@@ -1,8 +1,8 @@
 'use strict';
 
 (function () {
-  window.slider = function (handler, element, block, someFunction) {
-    handler.addEventListener('mousedown', function (evt) {
+  window.slider = function (element, block, setCoords) {
+    element.addEventListener('mousedown', function (evt) {
       evt.preventDefault();
 
       var startCoords = {
@@ -20,9 +20,9 @@
         var coordsY = element.offsetTop - shift.y;
 
         var limitsSizeBlock = {
-          left: 0 - handler.offsetWidth / 2,
-          right: block.offsetWidth - handler.offsetWidth / 2,
-          top: 130 - handler.offsetHeight - 22,
+          left: 0 - element.offsetWidth / 2,
+          right: block.offsetWidth - element.offsetWidth / 2,
+          top: 130 - element.offsetHeight - 22,
           bottom: 630
         };
 
@@ -31,13 +31,23 @@
           y: mouseEvt.clientY
         };
 
-        if (coordsX < limitsSizeBlock.right && coordsX > limitsSizeBlock.left && coordsY > limitsSizeBlock.top && coordsY < limitsSizeBlock.bottom) {
-          element.style.left = coordsX + 'px';
-          element.style.top = coordsY + 'px';
+        if (coordsX < limitsSizeBlock.left) {
+          coordsX = limitsSizeBlock.left
+        }
+        if (coordsX > limitsSizeBlock.right) {
+          coordsX = limitsSizeBlock.right
+        }
+        if (coordsY > limitsSizeBlock.bottom) {
+          coordsY = limitsSizeBlock.bottom
+        }
+        if (coordsY < limitsSizeBlock.top) {
+          coordsY = limitsSizeBlock.top
         }
 
-        window.pinX = coordsX;
-        window.pinY = coordsY;
+        element.style.left = coordsX + 'px';
+        element.style.top = coordsY + 'px';
+
+        setCoords(coordsX, coordsY)
       };
 
       var dragged = false;
@@ -57,15 +67,14 @@
         if (dragged) {
           var onClickPreventDefault = function (clickEvt) {
             clickEvt.preventDefault();
-            handler.removeEventListener('click', onClickPreventDefault);
+            element.removeEventListener('click', onClickPreventDefault);
           };
-          handler.addEventListener('click', onClickPreventDefault);
+          element.addEventListener('click', onClickPreventDefault);
         }
       };
 
       document.addEventListener('mousemove', onMouseMove);
       document.addEventListener('mouseup', onMouseUp);
     });
-    element.addEventListener('mousemove', someFunction);
   };
 })();

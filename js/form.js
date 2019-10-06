@@ -71,8 +71,8 @@
     addressInputElement.value = (coordsPinX + Math.round(mainPinWidth / 2)) + ' ' + (coordsPinY + Math.round(mainPinHeight / 2));
   };
 
-  window.slider(mapPinMainElement, mapPinMainElement, mapElement, function () {
-    addressInputElement.value = (window.pinX + Math.round(mainPinWidth / 2)) + ' ' + (window.pinY + mainPinHeightCursor);
+  window.slider(mapPinMainElement, mapElement, function (pinX, pinY) {
+    addressInputElement.value = Math.round(pinX + (mainPinWidth / 2)) + ' ' + Math.round(pinY + mainPinHeightCursor);
   });
 
   mapPinMainElement.addEventListener('mousedown', function () {
