@@ -47,7 +47,7 @@
         element.style.left = coordsX + 'px';
         element.style.top = coordsY + 'px';
 
-        setCoords(coordsX, coordsY)
+        setCoords(coordsX, coordsY);
       };
 
       var dragged = false;
