@@ -22,7 +22,7 @@
         var limitsSizeBlock = {
           left: 0 - element.offsetWidth / 2,
           right: block.offsetWidth - element.offsetWidth / 2,
-          top: 130 - element.offsetHeight - 22,
+          top: 130,
           bottom: 630
         };
 
@@ -32,16 +32,16 @@
         };
 
         if (coordsX < limitsSizeBlock.left) {
-          coordsX = limitsSizeBlock.left
+          coordsX = limitsSizeBlock.left;
         }
         if (coordsX > limitsSizeBlock.right) {
-          coordsX = limitsSizeBlock.right
+          coordsX = limitsSizeBlock.right;
         }
         if (coordsY > limitsSizeBlock.bottom) {
-          coordsY = limitsSizeBlock.bottom
+          coordsY = limitsSizeBlock.bottom;
         }
         if (coordsY < limitsSizeBlock.top) {
-          coordsY = limitsSizeBlock.top
+          coordsY = limitsSizeBlock.top;
         }
 
         element.style.left = coordsX + 'px';
