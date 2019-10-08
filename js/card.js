@@ -3,6 +3,10 @@
 (function () {
   var cardFragment = document.createDocumentFragment();
   var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
+  var pinFragment = document.createDocumentFragment();
+  var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+  var mapPinsElement = window.util.mapElement.querySelector('.map__pins');
+  var mapFiltersElement = window.util.mapElement.querySelector('.map__filters-container');
 
   var generateType = function (card) {
     switch (card.offer.type) {
@@ -58,10 +62,27 @@
     return cardElement;
   };
 
-  for (var j = 0; j < window.util.PINS_ARR_LENGTH; j++) {
-    cardFragment.appendChild(renderCards(window.pin.pins[j]));
-  }
 
-  window.util.mapElement.insertBefore(cardFragment, window.pin.mapFiltersElement);
+  var renderPins = function (pin) {
+    var pinElement = pinTemplate.cloneNode(true);
+    pinElement.querySelector('img').src = pin.author.avatar;
+    pinElement.querySelector('img').alt = pin.offer.title;
+    pinElement.style.left = pin.location.x - window.util.PIN_HALF_WIDTH + 'px';
+    pinElement.style.top = pin.location.y - window.util.PIN_HEIGHT + 'px';
+    pinElement.style.display = 'none';
+    return pinElement;
+  };
 
+  var successHandler = function (pins) {
+      for (var j = 0; j < window.util.PINS_ARR_LENGTH; j++) {
+        cardFragment.appendChild(renderCards(pins[j]));
+      }
+
+      for (var i = 0; i < window.util.PINS_ARR_LENGTH; i++) {
+        pinFragment.appendChild(renderPins(pins[i]));
+      }
+      window.util.mapElement.insertBefore(cardFragment, mapFiltersElement);
+      mapPinsElement.appendChild(pinFragment);
+  };
+  window.backend.load(successHandler)
 })();
