@@ -36,7 +36,7 @@
   var generateYCoordinate = function () {
     var MAX_Y_BLOCK = 630;
     var MIN_Y_BLOCK = 130;
-    return Math.round(Math.random() * (MAX_Y_BLOCK - MIN_Y_BLOCK)) + MIN_Y_BLOCK;
+    return Math.round(Math.random() * (MAX_Y_BLOCK - MIN_Y_BLOCK)) + MIN_Y_BLOCK + window.util.mainPinHeightCursor;
   };
 
   var generatePrice = function () {

@@ -2,7 +2,6 @@
 
 (function () {
   var mapPinsElement = window.util.mapElement.querySelector('.map__pins');
-  var mapPinMainElement = mapPinsElement.querySelector('.map__pin--main');
   var adFormElement = document.querySelector('.ad-form');
   var adFormFieldsetList = adFormElement.querySelectorAll('.ad-form fieldset');
   var mapFiltersElement = window.util.mapElement.querySelector('.map__filters');
@@ -17,12 +16,14 @@
   var typeElement = adFormElement.querySelector('#type');
   var timeInElement = adFormElement.querySelector('#timein');
   var timeOutElement = adFormElement.querySelector('#timeout');
-  var pins = document.querySelectorAll('.map__pin:not(.map__pin--main');
-  var coordsY = mapPinMainElement.offsetTop;
-  var coordsX = mapPinMainElement.offsetLeft;
-  var mainPinWidth = mapPinMainElement.offsetWidth;
-  var mainPinHeight = mapPinMainElement.offsetHeight;
-  var mainPinHeightCursor = mapPinMainElement.offsetHeight + 22;
+  var pinsElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
+  var coordsPinY = window.util.coordsPinY;
+  var coordsPinX = window.util.coordsPinX;
+  var mainPinWidth = window.util.mainPinWidth;
+  var mainPinHeight = window.util.mainPinHeight;
+  var mainPinHeightCursor = window.util.mainPinHeightCursor;
+  var mapPinMainElement = window.util.mapPinMainElement;
+  var mapElement = window.util.mapElement;
 
   var addDisabledAttribute = function (element) {
     element.setAttribute('disabled', 'disabled');
@@ -43,14 +44,14 @@
     typeElement: typeElement,
     timeInElement: timeInElement,
     timeOutElement: timeOutElement,
-    pins: pins,
+    pinsElement: pinsElement,
     addDisabledAttribute: addDisabledAttribute,
     removeDisabledAttribute: removeDisabledAttribute
   };
 
   var showPins = function () {
-    for (var i = 0; i < pins.length; i++) {
-      pins[i].style.display = null;
+    for (var i = 0; i < pinsElement.length; i++) {
+      pinsElement[i].style.display = null;
     }
   };
 
@@ -60,7 +61,6 @@
     removeDisabledAttribute(mapFiltersFieldsetElement);
     window.util.doIterationCycle(adFormFieldsetList, removeDisabledAttribute);
     window.util.doIterationCycle(mapFiltersSelectList, removeDisabledAttribute);
-    addressInputElement.value = (coordsX + Math.round(mainPinWidth / 2)) + ' ' + (coordsY + mainPinHeightCursor);
     showPins();
   };
 
@@ -68,8 +68,12 @@
     window.util.doIterationCycle(adFormFieldsetList, addDisabledAttribute);
     window.util.doIterationCycle(mapFiltersSelectList, addDisabledAttribute);
     addDisabledAttribute(mapFiltersFieldsetElement);
-    addressInputElement.value = (coordsX + Math.round(mainPinWidth / 2)) + ' ' + (coordsY + Math.round(mainPinHeight / 2));
+    addressInputElement.value = (coordsPinX + Math.round(mainPinWidth / 2)) + ' ' + (coordsPinY + Math.round(mainPinHeight / 2));
   };
+
+  window.slider(mapPinMainElement, mapElement, function (pinX, pinY) {
+    addressInputElement.value = Math.round(pinX + (mainPinWidth / 2)) + ' ' + Math.round(pinY + mainPinHeightCursor);
+  });
 
   mapPinMainElement.addEventListener('mousedown', function () {
     setActiveWindow();
