@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  var PINS_ARR_LENGTH = 8;
   var PIN_HEIGHT = 70;
   var PIN_HALF_WIDTH = 50 / 2;
   var ENTER_KEY_CODE = 13;
@@ -21,7 +20,6 @@
   };
 
   window.util = {
-    PINS_ARR_LENGTH: PINS_ARR_LENGTH,
     PIN_HEIGHT: PIN_HEIGHT,
     PIN_HALF_WIDTH: PIN_HALF_WIDTH,
     ENTER_KEY_CODE: ENTER_KEY_CODE,

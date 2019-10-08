@@ -74,11 +74,11 @@
   };
 
   var successHandler = function (pins) {
-      for (var j = 0; j < window.util.PINS_ARR_LENGTH; j++) {
+      for (var j = 0; j < pins.length; j++) {
         cardFragment.appendChild(renderCards(pins[j]));
       }
 
-      for (var i = 0; i < window.util.PINS_ARR_LENGTH; i++) {
+      for (var i = 0; i < pins.length; i++) {
         pinFragment.appendChild(renderPins(pins[i]));
       }
       window.util.mapElement.insertBefore(cardFragment, mapFiltersElement);
