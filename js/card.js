@@ -31,9 +31,57 @@
     var popupPhotosElement = cardElement.querySelector('.popup__photos');
     var popupPhotoElement = cardElement.querySelector('.popup__photo');
     var typePopupElement = cardElement.querySelector('.popup__type');
-    var popupFeatureElement = cardElement.querySelectorAll('.popup__feature');
-    var popupFeatures = cardElement.querySelector('.popup__features');
-    var featureCount = popupFeatures.childElementCount;
+
+    var setFeature = function () {
+      var popupFeaturesElement = cardElement.querySelector('.popup__features');
+      var popupFeatureElement = cardElement.querySelectorAll('.popup__feature');
+      var popupFeatureWifiElement = cardElement.querySelector('.popup__feature--wifi');
+      var popupFeatureDishwasherElement = cardElement.querySelector('.popup__feature--dishwasher');
+      var popupFeatureParkingElement = cardElement.querySelector('.popup__feature--parking');
+      var popupFeatureWasherElement = cardElement.querySelector('.popup__feature--washer');
+      var popupFeatureElevatorElement = cardElement.querySelector('.popup__feature--elevator');
+      var popupFeatureConditionerElement = cardElement.querySelector('.popup__feature--conditioner');
+
+      var hidePopups = function () {
+        for (var j = 0; j < popupFeatureElement.length; j++) {
+          popupFeatureElement[j].style.display = 'none';
+        }
+      };
+
+      var checkFeature = function () {
+        for (var i = 0; i < card.offer.features.length; i++) {
+          switch (card.offer.features[i]) {
+            case 'wifi':
+              popupFeatureWifiElement.style.display = null;
+              break;
+            case 'dishwasher':
+              popupFeatureDishwasherElement.style.display = null;
+              break;
+            case 'parking':
+              popupFeatureParkingElement.style.display = null;
+              break;
+            case 'washer':
+              popupFeatureWasherElement.style.display = null;
+              break;
+            case 'elevator':
+              popupFeatureElevatorElement.style.display = null;
+              break;
+            case 'conditioner':
+              popupFeatureConditionerElement.style.display = null;
+              break;
+          }
+        }
+      };
+
+      if (card.offer.features.length !== 0) {
+        hidePopups();
+        checkFeature();
+      } else {
+        cardElement.removeChild(popupFeaturesElement);
+      }
+    };
+
+    setFeature();
 
     cardElement.querySelector('.popup__title').textContent = card.offer.title;
     cardElement.querySelector('.popup__text--address').textContent = card.offer.address;
@@ -43,13 +91,6 @@
 
     cardElement.querySelector('.popup__text--capacity').textContent = card.offer.rooms + ' комнаты для ' + card.offer.guests + ' гостей';
     cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + card.offer.checkin + ', выезд до ' + card.offer.checkout;
-
-    for (var i = 0; i < featureCount; i++) {
-      switch (card.offer.features[i]) {
-        case 'washer':
-          popupFeatureElement
-      }
-    }
 
     cardElement.querySelector('.popup__description').textContent = card.offer.description;
 
@@ -67,7 +108,6 @@
     return cardElement;
   };
 
-
   var renderPins = function (pin) {
     var pinElement = pinTemplate.cloneNode(true);
     pinElement.querySelector('img').src = pin.author.avatar;
@@ -79,12 +119,15 @@
   };
 
   var successHandler = function (pins) {
+
     for (var j = 0; j < pins.length; j++) {
       cardFragment.appendChild(renderCards(pins[j]));
     }
+
     for (var i = 0; i < pins.length; i++) {
       pinFragment.appendChild(renderPins(pins[i]));
     }
+
     window.util.mapElement.insertBefore(cardFragment, mapFiltersElement);
     mapPinsElement.appendChild(pinFragment);
 
@@ -99,4 +142,5 @@
   };
 
   window.backend.load(successHandler);
+
 })();
