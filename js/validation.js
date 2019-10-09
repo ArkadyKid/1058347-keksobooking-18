@@ -9,6 +9,7 @@
   var priceElement = window.form.priceElement;
   var timeInElement = window.form.timeInElement;
   var timeOutElement = window.form.timeOutElement;
+
   var addDisabledAttribute = window.form.addDisabledAttribute;
   var removeDisabledAttribute = window.form.removeDisabledAttribute;
 

@@ -1,9 +1,6 @@
 'use strict';
 
 (function () {
-  var pinsElement = window.form.pinsElement;
-  var popups = document.querySelectorAll('.popup');
-  var popupCloseElements = document.querySelectorAll('.popup__close');
 
   var removeOnEscPress = function () {
     document.removeEventListener('keydown', onPopupEscPress);
@@ -13,7 +10,7 @@
     document.addEventListener('keydown', onPopupEscPress);
   };
 
-  var onPopupEscPress = function (evt) {
+  var onPopupEscPress = function (evt, element) {
     if (evt.keyCode === window.util.ESC_KEY_CODE) {
       for (var i = 0; i < pinsElement.length; i++) {
         addCloseAttribute(i);
@@ -57,8 +54,8 @@
     });
   };
 
-  for (var i = 0; i < pinsElement.length; i++) {
-    showCard(i);
-    closeCard(i);
-  }
+  window.actionCard = {
+    showCard: showCard,
+    closeCard: closeCard
+  };
 })();

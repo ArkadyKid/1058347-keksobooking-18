@@ -1,6 +1,14 @@
 'use strict';
 
 (function () {
+  var coordsPinY = window.util.coordsPinY;
+  var coordsPinX = window.util.coordsPinX;
+  var mainPinWidth = window.util.mainPinWidth;
+  var mainPinHeight = window.util.mainPinHeight;
+  var mainPinHeightCursor = window.util.mainPinHeightCursor;
+  var mapPinMainElement = window.util.mapPinMainElement;
+  var mapElement = window.util.mapElement;
+
   var mapPinsElement = window.util.mapElement.querySelector('.map__pins');
   var adFormElement = document.querySelector('.ad-form');
   var adFormFieldsetList = adFormElement.querySelectorAll('.ad-form fieldset');
@@ -16,30 +24,7 @@
   var typeElement = adFormElement.querySelector('#type');
   var timeInElement = adFormElement.querySelector('#timein');
   var timeOutElement = adFormElement.querySelector('#timeout');
-  var pinsElement = mapPinsElement.querySelectorAll('.map__pin:not(.map__pin--main');
-  var coordsPinY = window.util.coordsPinY;
-  var coordsPinX = window.util.coordsPinX;
-  var mainPinWidth = window.util.mainPinWidth;
-  var mainPinHeight = window.util.mainPinHeight;
-  var mainPinHeightCursor = window.util.mainPinHeightCursor;
-  var mapPinMainElement = window.util.mapPinMainElement;
-  var mapElement = window.util.mapElement;
 
-  window.form = {
-    roomNumberElement: roomNumberElement,
-    capacityElement: capacityElement,
-    capacityOptionElement: capacityOptionElement,
-    mapPinsElement: mapPinsElement,
-    mapFiltersElement: mapFiltersElement,
-    titleElement: titleElement,
-    priceElement: priceElement,
-    typeElement: typeElement,
-    timeInElement: timeInElement,
-    timeOutElement: timeOutElement,
-    pinsElement: pinsElement,
-    addDisabledAttribute: addDisabledAttribute,
-    removeDisabledAttribute: removeDisabledAttribute
-  };
 
   var addDisabledAttribute = function (element) {
     element.setAttribute('disabled', 'disabled');
@@ -96,4 +81,19 @@
       setActiveWindow();
     }
   });
+
+  window.form = {
+    roomNumberElement: roomNumberElement,
+    capacityElement: capacityElement,
+    capacityOptionElement: capacityOptionElement,
+    mapPinsElement: mapPinsElement,
+    mapFiltersElement: mapFiltersElement,
+    titleElement: titleElement,
+    priceElement: priceElement,
+    typeElement: typeElement,
+    timeInElement: timeInElement,
+    timeOutElement: timeOutElement,
+    addDisabledAttribute: addDisabledAttribute,
+    removeDisabledAttribute: removeDisabledAttribute
+  };
 })();

@@ -5,8 +5,10 @@
   var PIN_HALF_WIDTH = 50 / 2;
   var ENTER_KEY_CODE = 13;
   var ESC_KEY_CODE = 27;
+
   var mapElement = document.querySelector('.map');
   var mapPinMainElement = document.querySelector('.map__pin--main');
+
   var coordsPinY = mapPinMainElement.offsetTop;
   var coordsPinX = mapPinMainElement.offsetLeft;
   var mainPinWidth = mapPinMainElement.offsetWidth;
