@@ -2,7 +2,8 @@
 
 (function () {
 
-  var URL = 'https://js.dump.academy/keksobooking/data';
+  var GET_URL = 'https://js.dump.academy/keksobooking/data';
+  var POST_URL = 'https://js.dump.academy/keksobooking';
   var SUCCESS_STATUS = 200;
   var INVALID_URL_STATUS = 500;
   var TIMEOUT = 10000;
@@ -11,35 +12,35 @@
     var errorTemplate = document.querySelector('#error').content.querySelector('.error');
     var errorElement = errorTemplate.cloneNode(true);
     var errorMessageElement = errorElement.querySelector('.error__message');
-    var errorButtonElement = errorElement.querySelector('.error__button');
+
+    document.body.appendChild(errorElement);
 
     var hideErrorBlock = function () {
       document.body.removeChild(errorElement);
     };
 
-    var onClickErrorButton = function (evt) {
-      evt.preventDefault();
-      hideErrorBlock();
-      errorButtonElement.removeEventListener('click', onClickErrorButton);
-    };
-
     var onEscPress = function (evt) {
-      evt.preventDefault();
       if (evt.keyCode === window.util.ESC_KEY_CODE) {
+        evt.preventDefault();
         hideErrorBlock();
       }
-      errorButtonElement.removeEventListener('keydown', onEscPress);
+      document.removeEventListener('keydown', onEscPress);
+    };
+
+    var onClickErrorBlock = function (evt) {
+      evt.preventDefault();
+      hideErrorBlock();
+      errorElement.removeEventListener('click', onClickErrorBlock);
+      document.removeEventListener('keydown', onEscPress);
     };
 
     errorMessageElement.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', errorElement);
-    errorButtonElement.addEventListener('click', onClickErrorButton);
+
     document.addEventListener('keydown', onEscPress);
+    errorElement.addEventListener('click', onClickErrorBlock);
   };
 
-  var load = function (onSuccess, onError) {
-    var xhr = new XMLHttpRequest();
-
+  var setBehaviourResponse = function (xhr, onSuccess, onError) {
     var checkError = function () {
       switch (xhr.status) {
         case SUCCESS_STATUS:
@@ -61,14 +62,27 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'ms');
     });
     xhr.timeout = TIMEOUT;
+  };
 
+  var load = function (onSuccess, onError) {
+    var xhr = new XMLHttpRequest();
+    setBehaviourResponse(xhr, onSuccess, onError);
     xhr.responseType = 'json';
-    xhr.open('GET', URL);
+    xhr.open('GET', GET_URL);
     xhr.send();
+  };
+
+  var upload = function (data, onSuccess, onError) {
+    var xhr = new XMLHttpRequest();
+    setBehaviourResponse(xhr, onSuccess, onError);
+    xhr.responseType = 'json';
+    xhr.open('POST', POST_URL);
+    xhr.send(data);
   };
 
   window.backend = {
     load: load,
+    upload: upload,
     errorHandler: errorHandler
   };
 })();
