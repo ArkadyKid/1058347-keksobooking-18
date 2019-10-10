@@ -1,6 +1,15 @@
 'use strict';
 
 (function () {
+
+  var coordsPinY = window.util.coordsPinY;
+  var coordsPinX = window.util.coordsPinX;
+  var mainPinWidth = window.util.mainPinWidth;
+  var mainPinHeight = window.util.mainPinHeight;
+  var mainPinHeightCursor = window.util.mainPinHeightCursor;
+  var mapPinMainElement = window.util.mapPinMainElement;
+  var mapElement = window.util.mapElement;
+
   var mapPinsElement = window.util.mapElement.querySelector('.map__pins');
   var adFormElement = document.querySelector('.ad-form');
   var adFormFieldsetList = adFormElement.querySelectorAll('.ad-form fieldset');
@@ -16,14 +25,7 @@
   var typeElement = adFormElement.querySelector('#type');
   var timeInElement = adFormElement.querySelector('#timein');
   var timeOutElement = adFormElement.querySelector('#timeout');
-  var pinsElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
-  var coordsPinY = window.util.coordsPinY;
-  var coordsPinX = window.util.coordsPinX;
-  var mainPinWidth = window.util.mainPinWidth;
-  var mainPinHeight = window.util.mainPinHeight;
-  var mainPinHeightCursor = window.util.mainPinHeightCursor;
-  var mapPinMainElement = window.util.mapPinMainElement;
-  var mapElement = window.util.mapElement;
+
 
   var addDisabledAttribute = function (element) {
     element.setAttribute('disabled', 'disabled');
@@ -33,25 +35,9 @@
     element.removeAttribute('disabled');
   };
 
-  window.form = {
-    roomNumberElement: roomNumberElement,
-    capacityElement: capacityElement,
-    capacityOptionElement: capacityOptionElement,
-    mapPinsElement: mapPinsElement,
-    mapFiltersElement: mapFiltersElement,
-    titleElement: titleElement,
-    priceElement: priceElement,
-    typeElement: typeElement,
-    timeInElement: timeInElement,
-    timeOutElement: timeOutElement,
-    pinsElement: pinsElement,
-    addDisabledAttribute: addDisabledAttribute,
-    removeDisabledAttribute: removeDisabledAttribute
-  };
-
   var showPins = function () {
-    for (var i = 0; i < pinsElement.length; i++) {
-      pinsElement[i].style.display = null;
+    for (var i = 0; i < window.pinsElement.length; i++) {
+      window.pinsElement[i].style.display = null;
     }
   };
 
@@ -75,16 +61,6 @@
     addressInputElement.value = Math.round(pinX + (mainPinWidth / 2)) + ' ' + Math.round(pinY + mainPinHeightCursor);
   });
 
-  mapPinMainElement.addEventListener('mousedown', function () {
-    setActiveWindow();
-  });
-
-  mapPinMainElement.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.util.ENTER_KEY_CODE) {
-      setActiveWindow();
-    }
-  });
-
   window.addEventListener('load', function () {
     setInactiveWindow();
     if (roomNumberElement.value === '1') {
@@ -96,4 +72,30 @@
       priceElement.min = 1000;
     }
   });
+
+  mapPinMainElement.addEventListener('mousedown', function () {
+    setActiveWindow();
+  });
+
+  mapPinMainElement.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === window.util.ENTER_KEY_CODE) {
+      setActiveWindow();
+    }
+  });
+
+
+  window.form = {
+    roomNumberElement: roomNumberElement,
+    capacityElement: capacityElement,
+    capacityOptionElement: capacityOptionElement,
+    mapPinsElement: mapPinsElement,
+    mapFiltersElement: mapFiltersElement,
+    titleElement: titleElement,
+    priceElement: priceElement,
+    typeElement: typeElement,
+    timeInElement: timeInElement,
+    timeOutElement: timeOutElement,
+    addDisabledAttribute: addDisabledAttribute,
+    removeDisabledAttribute: removeDisabledAttribute
+  };
 })();

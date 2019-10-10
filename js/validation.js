@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var roomNumberElement = window.form.roomNumberElement;
   var capacityOptionElement = window.form.capacityOptionElement;
   var capacityElement = window.form.capacityElement;
@@ -9,6 +10,7 @@
   var priceElement = window.form.priceElement;
   var timeInElement = window.form.timeInElement;
   var timeOutElement = window.form.timeOutElement;
+
   var addDisabledAttribute = window.form.addDisabledAttribute;
   var removeDisabledAttribute = window.form.removeDisabledAttribute;
 
