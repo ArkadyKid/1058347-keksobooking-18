@@ -6,9 +6,38 @@
   var INVALID_URL_STATUS = 500;
   var TIMEOUT = 10000;
 
+  var errorHandler = function (errorMessage) {
+    var errorTemplate = document.querySelector('#error').content.querySelector('.error');
+    var errorElement = errorTemplate.cloneNode(true);
+    var errorMessageElement = errorElement.querySelector('.error__message');
+    var errorButtonElement = errorElement.querySelector('.error__button');
+
+    var hideErrorBlock = function () {
+      document.body.removeChild(errorElement);
+    };
+
+    var onClickErrorButton = function (evt) {
+      evt.preventDefault();
+      hideErrorBlock();
+      errorButtonElement.removeEventListener('click', onClickErrorButton);
+    };
+
+    var onEscPress = function (evt) {
+      evt.preventDefault();
+      if (evt.keyCode === window.util.ESC_KEY_CODE) {
+        hideErrorBlock();
+      }
+      errorButtonElement.removeEventListener('click', onEscPress);
+    };
+
+    errorMessageElement.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', errorElement);
+    errorButtonElement.addEventListener('click', onClickErrorButton);
+    document.addEventListener('keydown', onEscPress);
+  };
+
   var load = function (onSuccess, onError) {
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'json';
+    window.xhr = new XMLHttpRequest();
 
     var checkError = function () {
       switch (xhr.status) {
@@ -32,11 +61,13 @@
     });
     xhr.timeout = TIMEOUT;
 
+    xhr.responseType = 'json';
     xhr.open('GET', URL);
     xhr.send();
   };
 
   window.backend = {
-    load: load
+    load: load,
+    errorHandler: errorHandler
   }
 })();

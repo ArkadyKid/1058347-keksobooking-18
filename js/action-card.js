@@ -10,7 +10,7 @@
     document.addEventListener('keydown', onPopupEscPress);
   };
 
-  var onPopupEscPress = function (evt, element) {
+  var onPopupEscPress = function (evt) {
     if (evt.keyCode === window.util.ESC_KEY_CODE) {
       for (var i = 0; i < pinsElement.length; i++) {
         addCloseAttribute(i);

@@ -109,13 +109,16 @@
   };
 
   var renderPins = function (pin) {
-    var pinElement = pinTemplate.cloneNode(true);
-    pinElement.querySelector('img').src = pin.author.avatar;
-    pinElement.querySelector('img').alt = pin.offer.title;
-    pinElement.style.left = pin.location.x - window.util.PIN_HALF_WIDTH + 'px';
-    pinElement.style.top = pin.location.y - window.util.PIN_HEIGHT + 'px';
-    pinElement.style.display = 'none';
-    return pinElement;
+    if (pin.offer) {
+      var pinElement = pinTemplate.cloneNode(true);
+      pinElement.querySelector('img').src = pin.author.avatar;
+      pinElement.querySelector('img').alt = pin.offer.title;
+      pinElement.style.left = pin.location.x - window.util.PIN_HALF_WIDTH + 'px';
+      pinElement.style.top = pin.location.y - window.util.PIN_HEIGHT + 'px';
+      pinElement.style.display = 'none';
+      return pinElement;
+    }
+    return null;
   };
 
   var successHandler = function (pins) {
@@ -141,6 +144,6 @@
     }
   };
 
-  window.backend.load(successHandler);
+  window.backend.load(successHandler, window.backend.errorHandler);
 
 })();
