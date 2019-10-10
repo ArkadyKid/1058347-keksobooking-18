@@ -148,7 +148,7 @@
 
   adFormElement.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    upload(new FormData(adFormElement), successHandler, errorHandler)
+    upload(new FormData(adFormElement), successHandler, errorHandler);
   });
 
   window.form = {
