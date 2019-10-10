@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var coordsPinY = window.util.coordsPinY;
   var coordsPinX = window.util.coordsPinX;
   var mainPinWidth = window.util.mainPinWidth;
@@ -72,19 +73,15 @@
     }
   });
 
-    mapPinMainElement.addEventListener('mousedown', function () {
-      if (window.xhr.readyState === 4) {
-        setActiveWindow();
-      }
-    });
+  mapPinMainElement.addEventListener('mousedown', function () {
+    setActiveWindow();
+  });
 
-    mapPinMainElement.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === window.util.ENTER_KEY_CODE) {
-        if (window.xhr.readyState === 4) {
-          setActiveWindow();
-        }
-      }
-    });
+  mapPinMainElement.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === window.util.ENTER_KEY_CODE) {
+      setActiveWindow();
+    }
+  });
 
 
   window.form = {

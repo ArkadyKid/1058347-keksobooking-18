@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var roomNumberElement = window.form.roomNumberElement;
   var capacityOptionElement = window.form.capacityOptionElement;
   var capacityElement = window.form.capacityElement;

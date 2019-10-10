@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var URL = 'https://js.dump.academy/keksobooking/data';
   var SUCCESS_STATUS = 200;
   var INVALID_URL_STATUS = 500;
@@ -27,7 +28,7 @@
       if (evt.keyCode === window.util.ESC_KEY_CODE) {
         hideErrorBlock();
       }
-      errorButtonElement.removeEventListener('click', onEscPress);
+      errorButtonElement.removeEventListener('keydown', onEscPress);
     };
 
     errorMessageElement.textContent = errorMessage;
@@ -37,7 +38,7 @@
   };
 
   var load = function (onSuccess, onError) {
-    window.xhr = new XMLHttpRequest();
+    var xhr = new XMLHttpRequest();
 
     var checkError = function () {
       switch (xhr.status) {

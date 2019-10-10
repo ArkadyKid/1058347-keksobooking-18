@@ -1,6 +1,10 @@
 'use strict';
 
 (function () {
+
+  var load = window.backend.load;
+  var errorHandler = window.backend.errorHandler;
+
   var cardFragment = document.createDocumentFragment();
   var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
   var pinFragment = document.createDocumentFragment();
@@ -31,6 +35,13 @@
     var popupPhotosElement = cardElement.querySelector('.popup__photos');
     var popupPhotoElement = cardElement.querySelector('.popup__photo');
     var typePopupElement = cardElement.querySelector('.popup__type');
+    var popupTitleElement = cardElement.querySelector('.popup__title');
+    var popupAddressElement = cardElement.querySelector('.popup__text--address');
+    var popupPriceElement = cardElement.querySelector('.popup__text--price');
+    var popupDescriptionElement = cardElement.querySelector('.popup__description');
+    var popupCapacityElement = cardElement.querySelector('.popup__text--capacity');
+    var popupTimeElement = cardElement.querySelector('.popup__text--time');
+    var popupAvatarElement = cardElement.querySelector('.popup__avatar');
 
     var setFeature = function () {
       var popupFeaturesElement = cardElement.querySelector('.popup__features');
@@ -81,29 +92,63 @@
       }
     };
 
-    setFeature();
+    var setPhotos = function () {
+      popupPhotosElement.removeChild(popupPhotoElement);
+      var checkPhotos = function () {
+        for (var k = 0; k < card.offer.photos.length; k++) {
+          var popupPhotoCloneElement = popupPhotoElement.cloneNode();
+          popupPhotosElement.appendChild(popupPhotoCloneElement);
+          var popupPhotoList = cardElement.querySelectorAll('.popup__photo');
+          popupPhotoList[k].src = card.offer.photos[k];
+        }
+      };
+      if (card.offer.photos.length !== 0) {
+        checkPhotos();
+      } else {
+        cardElement.removeChild(popupPhotosElement);
+      }
+    };
 
-    cardElement.querySelector('.popup__title').textContent = card.offer.title;
-    cardElement.querySelector('.popup__text--address').textContent = card.offer.address;
-    cardElement.querySelector('.popup__text--price').textContent = card.offer.price + ' ₽/ночь';
+    var setContent = function (property, element) {
+      if (property.text !== '') {
+        element.textContent = property;
+      } else {
+        cardElement.removeChild(element);
+      }
+    };
+
+    setFeature();
+    setPhotos();
+    setContent(card.offer.title, popupTitleElement);
+    setContent(card.offer.address, popupAddressElement);
+    setContent(card.offer.description, popupDescriptionElement);
 
     typePopupElement.textContent = generateType(card);
 
-    cardElement.querySelector('.popup__text--capacity').textContent = card.offer.rooms + ' комнаты для ' + card.offer.guests + ' гостей';
-    cardElement.querySelector('.popup__text--time').textContent = 'Заезд после ' + card.offer.checkin + ', выезд до ' + card.offer.checkout;
-
-    cardElement.querySelector('.popup__description').textContent = card.offer.description;
-
-    popupPhotosElement.removeChild(popupPhotoElement);
-
-    for (var k = 0; k < card.offer.photos.length; k++) {
-      var popupPhotoCloneElement = popupPhotoElement.cloneNode();
-      popupPhotosElement.appendChild(popupPhotoCloneElement);
-      var popupPhotoList = cardElement.querySelectorAll('.popup__photo');
-      popupPhotoList[k].src = card.offer.photos[k];
+    if (card.offer.price.text !== '') {
+      popupPriceElement.textContent = card.offer.price + ' ₽';
+    } else {
+      cardElement.removeChild(popupPriceElement);
     }
 
-    cardElement.querySelector('.popup__avatar').src = card.author.avatar;
+    if (card.offer.rooms.text !== '' && card.offer.guests.text !== '') {
+      popupCapacityElement.textContent = card.offer.rooms + ' комнаты для ' + card.offer.guests + ' гостей';
+    } else {
+      cardElement.removeChild(popupCapacityElement);
+    }
+
+    if (card.offer.checkin !== '' && card.offer.checkout.text !== '') {
+      popupTimeElement.textContent = 'Заезд после ' + card.offer.checkin + ', выезд до ' + card.offer.checkout;
+    } else {
+      cardElement.removeChild(popupTimeElement);
+    }
+
+    if (card.author.avatar !== '') {
+      popupAvatarElement.src = card.author.avatar;
+    } else {
+      cardElement.removeChild(popupAvatarElement);
+    }
+
     cardElement.style.display = 'none';
     return cardElement;
   };
@@ -111,8 +156,10 @@
   var renderPins = function (pin) {
     if (pin.offer) {
       var pinElement = pinTemplate.cloneNode(true);
-      pinElement.querySelector('img').src = pin.author.avatar;
-      pinElement.querySelector('img').alt = pin.offer.title;
+      var pinImgElement = pinElement.querySelector('img');
+
+      pinImgElement.src = pin.author.avatar;
+      pinImgElement.alt = pin.offer.title;
       pinElement.style.left = pin.location.x - window.util.PIN_HALF_WIDTH + 'px';
       pinElement.style.top = pin.location.y - window.util.PIN_HEIGHT + 'px';
       pinElement.style.display = 'none';
@@ -122,7 +169,6 @@
   };
 
   var successHandler = function (pins) {
-
     for (var j = 0; j < pins.length; j++) {
       cardFragment.appendChild(renderCards(pins[j]));
     }
@@ -144,6 +190,6 @@
     }
   };
 
-  window.backend.load(successHandler, window.backend.errorHandler);
+  load(successHandler, errorHandler);
 
 })();

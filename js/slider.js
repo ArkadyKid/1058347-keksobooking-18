@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   window.slider = function (element, block, setCoords) {
     element.addEventListener('mousedown', function (evt) {
       evt.preventDefault();
