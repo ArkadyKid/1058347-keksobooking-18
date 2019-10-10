@@ -58,7 +58,7 @@
       onError('Произошла ошибка соединения');
     });
     xhr.addEventListener('timeout', function () {
-      onError('Запрос не успел выполниться за ' + xhr.timeout + 'ms')
+      onError('Запрос не успел выполниться за ' + xhr.timeout + 'ms');
     });
     xhr.timeout = TIMEOUT;
 
@@ -70,5 +70,5 @@
   window.backend = {
     load: load,
     errorHandler: errorHandler
-  }
+  };
 })();
