@@ -12,7 +12,7 @@
 
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === window.util.ESC_KEY_CODE) {
-      for (var i = 0; i < window.pinsElement.length; i++) {
+      for (var i = 0; i < window.card.pinsElement.length; i++) {
         addCloseAttribute(i);
       }
     }
@@ -20,24 +20,24 @@
   };
 
   var addCloseAttribute = function (element) {
-    window.popups[element].style.display = 'none';
+    window.card.popups[element].style.display = 'none';
   };
 
   var iteratePopups = function (element) {
-    for (var i = 0; i < window.pinsElement.length; i++) {
+    for (var i = 0; i < window.card.pinsElement.length; i++) {
       addCloseAttribute(i);
-      window.pinsElement[i].classList.remove('map__pin--active');
+      window.card.pinsElement[i].classList.remove('map__pin--active');
     }
-    window.popups[element].style.display = null;
-    window.pinsElement[element].classList.add('map__pin--active');
+    window.card.popups[element].style.display = null;
+    window.card.pinsElement[element].classList.add('map__pin--active');
   };
 
   var showCard = function (element) {
-    window.pinsElement[element].addEventListener('click', function () {
+    window.card.pinsElement[element].addEventListener('click', function () {
       iteratePopups(element);
       addOnEscPress();
     });
-    window.pinsElement[element].addEventListener('keydown', function (evt) {
+    window.card.pinsElement[element].addEventListener('keydown', function (evt) {
       if (evt.keyCode === window.util.ENTER_KEY_CODE) {
         iteratePopups(element);
         addOnEscPress();
@@ -46,8 +46,8 @@
   };
 
   var closeCard = function (element) {
-    window.popupCloseElements[element].addEventListener('click', function () {
-      for (var i = 0; i < window.pinsElement.length; i++) {
+    window.card.popupCloseElements[element].addEventListener('click', function () {
+      for (var i = 0; i < window.card.pinsElement.length; i++) {
         addCloseAttribute(i);
       }
       removeOnEscPress();
@@ -55,7 +55,7 @@
   };
 
   window.actionCard = {
-    showCard: showCard,
-    closeCard: closeCard
+    show: showCard,
+    close: closeCard
   };
 })();

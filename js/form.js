@@ -3,6 +3,7 @@
 (function () {
   var START_COORDS_MAIN_PIN_X = '570px';
   var START_COORDS_MAIN_PIN_Y = '375px';
+  var HALF = 2;
 
   var ESC_KEY_CODE = window.util.ESC_KEY_CODE;
 
@@ -42,20 +43,20 @@
   };
 
   var showPins = function () {
-    for (var i = 0; i < window.pinsElement.length; i++) {
-      window.pinsElement[i].style.display = null;
+    for (var i = 0; i < window.card.pinsElement.length; i++) {
+      window.card.pinsElement[i].style.display = null;
     }
   };
 
   var hidePins = function () {
-    for (var i = 0; i < window.pinsElement.length; i++) {
-      window.pinsElement[i].style.display = 'none';
+    for (var i = 0; i < window.card.pinsElement.length; i++) {
+      window.card.pinsElement[i].style.display = 'none';
     }
   };
 
   var hidePopups = function () {
-    for (var i = 0; i < window.popups.length; i++) {
-      window.popups[i].style.display = 'none';
+    for (var i = 0; i < window.card.popups.length; i++) {
+      window.card.popups[i].style.display = 'none';
     }
   };
 
@@ -74,7 +75,7 @@
     window.util.mapElement.classList.add('map--faded');
     adFormElement.classList.add('ad-form--disabled');
     addDisabledAttribute(mapFiltersFieldsetElement);
-    addressInputElement.value = (coordsPinX + Math.round(mainPinWidth / 2)) + ' ' + (coordsPinY + Math.round(mainPinHeight / 2));
+    addressInputElement.value = (coordsPinX + Math.round(mainPinWidth / HALF)) + ' ' + (coordsPinY + Math.round(mainPinHeight / HALF));
   };
 
   var setStartCoordsPin = function () {
@@ -118,7 +119,7 @@
   };
 
   window.slider(mapPinMainElement, mapElement, function (pinX, pinY) {
-    addressInputElement.value = Math.round(pinX + (mainPinWidth / 2)) + ' ' + Math.round(pinY + mainPinHeightCursor);
+    addressInputElement.value = Math.round(pinX + (mainPinWidth / HALF)) + ' ' + Math.round(pinY + mainPinHeightCursor);
   });
 
   window.addEventListener('load', function () {

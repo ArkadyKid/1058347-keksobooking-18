@@ -39,13 +39,19 @@
     window.util.mapElement.insertBefore(cardFragment, mapFiltersElement);
     mapPinsElement.appendChild(pinFragment);
 
-    window.pinsElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
-    window.popups = document.querySelectorAll('.popup');
-    window.popupCloseElements = document.querySelectorAll('.popup__close');
+    var pinsElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    var popups = document.querySelectorAll('.popup');
+    var popupCloseElements = document.querySelectorAll('.popup__close');
 
-    for (var k = 0; k < window.pinsElement.length; k++) {
-      window.actionCard.showCard(k);
-      window.actionCard.closeCard(k);
+    window.card = {
+      pinsElement: pinsElement,
+      popups: popups,
+      popupCloseElements: popupCloseElements
+    };
+
+    for (var k = 0; k < pinsElement.length; k++) {
+      window.actionCard.show(k);
+      window.actionCard.close(k);
     }
   };
 
