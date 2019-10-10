@@ -36,8 +36,8 @@
   };
 
   var showPins = function () {
-    for (var i = 0; i < pinsElement.length; i++) {
-      pinsElement[i].style.display = null;
+    for (var i = 0; i < window.pinsElement.length; i++) {
+      window.pinsElement[i].style.display = null;
     }
   };
 

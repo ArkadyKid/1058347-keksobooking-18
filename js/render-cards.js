@@ -14,22 +14,22 @@
     var popupTimeElement = cardElement.querySelector('.popup__text--time');
     var popupAvatarElement = cardElement.querySelector('.popup__avatar');
 
-    var generateType = function (card) {
-      switch (card.offer.type) {
+    var generateType = function (obj) {
+      switch (obj.offer.type) {
         case 'flat':
-          card.offer.type = 'Квартира';
+          obj.offer.type = 'Квартира';
           break;
         case 'bungalo':
-          card.offer.type = 'Бунгало';
+          obj.offer.type = 'Бунгало';
           break;
         case 'house':
-          card.offer.type = 'Дом';
+          obj.offer.type = 'Дом';
           break;
         case 'palace':
-          card.offer.type = 'Дворец';
+          obj.offer.type = 'Дворец';
           break;
       }
-      return card.offer.type;
+      return obj.offer.type;
     };
 
     var setFeature = function () {
@@ -144,5 +144,5 @@
 
   window.rendercards = {
     renderCards: renderCards
-  }
+  };
 })();
