@@ -127,16 +127,6 @@
     setStartRoomNumber();
   });
 
-  mapPinMainElement.addEventListener('mousedown', function () {
-    setActiveWindow();
-  });
-
-  mapPinMainElement.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.util.ENTER_KEY_CODE) {
-      setActiveWindow();
-    }
-  });
-
   var successHandler = function () {
     setInactiveWindow();
     hidePins();
@@ -164,6 +154,7 @@
     timeInElement: timeInElement,
     timeOutElement: timeOutElement,
     addDisabledAttribute: addDisabledAttribute,
-    removeDisabledAttribute: removeDisabledAttribute
+    removeDisabledAttribute: removeDisabledAttribute,
+    setActiveWindow: setActiveWindow
   };
 })();

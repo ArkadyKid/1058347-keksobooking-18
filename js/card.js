@@ -5,6 +5,8 @@
   var load = window.backend.load;
   var errorHandler = window.backend.errorHandler;
   var renderCards = window.rendercards.renderCards;
+  var setActiveWindow = window.form.setActiveWindow;
+  var mapPinMainElement = window.util.mapPinMainElement;
 
   var cardFragment = document.createDocumentFragment();
   var pinFragment = document.createDocumentFragment();
@@ -53,6 +55,16 @@
       window.actionCard.show(k);
       window.actionCard.close(k);
     }
+
+    mapPinMainElement.addEventListener('mousedown', function () {
+      setActiveWindow();
+    });
+
+    mapPinMainElement.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === window.util.ENTER_KEY_CODE) {
+        setActiveWindow();
+      }
+    });
   };
 
   load(successHandler, errorHandler);
