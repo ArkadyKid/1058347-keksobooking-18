@@ -1,6 +1,13 @@
 'use strict';
 
 (function () {
+  var MAX_TITLE_SYMBOLS = 30;
+  var MIN_PRICE_ELEMENT = {
+    BUNGALO: 0,
+    FLAT: 1000,
+    HOUSE: 5000,
+    PALACE: 10000
+  };
 
   var roomNumberElement = window.form.roomNumberElement;
   var capacityOptionElement = window.form.capacityOptionElement;
@@ -17,19 +24,19 @@
     switch (typeElement.value) {
       case 'bungalo':
         priceElement.placeholder = '0';
-        priceElement.min = 0;
+        priceElement.min = MIN_PRICE_ELEMENT.BUNGALO;
         break;
       case 'flat':
         priceElement.placeholder = '1000';
-        priceElement.min = 1000;
+        priceElement.min = MIN_PRICE_ELEMENT.FLAT;
         break;
       case 'house':
         priceElement.placeholder = '5000';
-        priceElement.min = 5000;
+        priceElement.min = MIN_PRICE_ELEMENT.HOUSE;
         break;
       case 'palace':
         priceElement.placeholder = '10000';
-        priceElement.min = 10000;
+        priceElement.min = MIN_PRICE_ELEMENT.PALACE;
         break;
     }
   };
@@ -85,7 +92,7 @@
 
   titleElement.addEventListener('input', function (evt) {
     var target = evt.target;
-    if (target.value.length < 30) {
+    if (target.value.length < MAX_TITLE_SYMBOLS) {
       titleElement.setCustomValidity('минимальная длина 30 символов, сейчас длина ' + (target.value.length));
     } else {
       titleElement.setCustomValidity('');

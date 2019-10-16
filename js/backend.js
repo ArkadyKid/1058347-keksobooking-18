@@ -2,10 +2,18 @@
 
 (function () {
 
-  var GET_URL = 'https://js.dump.academy/keksobooking/data';
-  var POST_URL = 'https://js.dump.academy/keksobooking';
-  var SUCCESS_STATUS = 200;
-  var INVALID_URL_STATUS = 500;
+  var ESC_KEY = window.util.KEY_CODE.ESC;
+
+  var URL = {
+    GET: 'https://js.dump.academy/keksobooking/data',
+    POST:'https://js.dump.academy/keksobooking'
+  };
+
+  var STATUS = {
+    SUCCESS: 200,
+    SERVER_ERROR: 500
+  };
+
   var TIMEOUT = 10000;
 
   var errorHandler = function (errorMessage) {
@@ -20,7 +28,7 @@
     };
 
     var onEscPress = function (evt) {
-      if (evt.keyCode === window.util.ESC_KEY_CODE) {
+      if (evt.keyCode === ESC_KEY) {
         evt.preventDefault();
         hideErrorBlock();
       }
@@ -43,10 +51,10 @@
   var setBehaviourResponse = function (xhr, onSuccess, onError) {
     var checkError = function () {
       switch (xhr.status) {
-        case SUCCESS_STATUS:
+        case STATUS.SUCCESS:
           onSuccess(xhr.response);
           break;
-        case INVALID_URL_STATUS:
+        case STATUS.SERVER_ERROR:
           onError('Неправильный URL');
           break;
         default:
@@ -68,7 +76,7 @@
     var xhr = new XMLHttpRequest();
     setBehaviourResponse(xhr, onSuccess, onError);
     xhr.responseType = 'json';
-    xhr.open('GET', GET_URL);
+    xhr.open('GET', URL.GET);
     xhr.send();
   };
 
@@ -76,7 +84,7 @@
     var xhr = new XMLHttpRequest();
     setBehaviourResponse(xhr, onSuccess, onError);
     xhr.responseType = 'json';
-    xhr.open('POST', POST_URL);
+    xhr.open('POST', URL.POST);
     xhr.send(data);
   };
 

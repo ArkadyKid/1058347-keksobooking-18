@@ -34,19 +34,15 @@
 
         if (coordsX < limitsSizeBlock.left) {
           coordsX = limitsSizeBlock.left;
-          stopMouse();
         }
         if (coordsX > limitsSizeBlock.right) {
           coordsX = limitsSizeBlock.right;
-          stopMouse();
         }
         if (coordsY > limitsSizeBlock.bottom) {
           coordsY = limitsSizeBlock.bottom;
-          stopMouse();
         }
         if (coordsY < limitsSizeBlock.top) {
           coordsY = limitsSizeBlock.top;
-          stopMouse();
         }
 
         element.style.left = coordsX + 'px';
@@ -75,11 +71,6 @@
           };
           element.addEventListener('click', onClickPreventDefault);
         }
-      };
-
-      var stopMouse = function () {
-        document.removeEventListener('mousemove', onMouseMove);
-        document.removeEventListener('mouseup', onMouseUp);
       };
 
       document.addEventListener('mousemove', onMouseMove);

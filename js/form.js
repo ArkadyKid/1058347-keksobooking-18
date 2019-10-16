@@ -1,11 +1,14 @@
 'use strict';
 
 (function () {
-  var START_COORDS_MAIN_PIN_X = '570px';
-  var START_COORDS_MAIN_PIN_Y = '375px';
-  var HALF = 2;
+  var START_COORDS_MAIN_PIN = {
+    X: '570px',
+    Y: '375px'
+  };
 
-  var ESC_KEY_CODE = window.util.ESC_KEY_CODE;
+  var HALF = 2;
+  var ESC_KEY_CODE = window.util.KEY_CODE.ESC;
+  var MIN_PRICE_ELEMENT_ON_LOAD = 1000;
 
   var coordsPinY = window.util.coordsPinY;
   var coordsPinX = window.util.coordsPinX;
@@ -79,8 +82,8 @@
   };
 
   var setStartCoordsPin = function () {
-    mapPinMainElement.style.left = START_COORDS_MAIN_PIN_X;
-    mapPinMainElement.style.top = START_COORDS_MAIN_PIN_Y;
+    mapPinMainElement.style.left = START_COORDS_MAIN_PIN.X;
+    mapPinMainElement.style.top = START_COORDS_MAIN_PIN.Y;
   };
 
   var setStartRoomNumber = function () {
@@ -90,7 +93,7 @@
       addDisabledAttribute(capacityOptionElement[3]);
       capacityElement.value = '1';
       priceElement.placeholder = '1000';
-      priceElement.min = 1000;
+      priceElement.min = MIN_PRICE_ELEMENT_ON_LOAD;
     }
   };
 
