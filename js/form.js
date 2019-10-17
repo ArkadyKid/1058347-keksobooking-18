@@ -46,20 +46,23 @@
   };
 
   var showPins = function () {
-    for (var i = 0; i < window.card.pinsElement.length; i++) {
-      window.card.pinsElement[i].style.display = null;
+    var pinsElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    for (var i = 0; i < pinsElement.length; i++) {
+      pinsElement[i].style.display = null;
     }
   };
 
   var hidePins = function () {
-    for (var i = 0; i < window.card.pinsElement.length; i++) {
-      window.card.pinsElement[i].style.display = 'none';
+    var pinsElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    for (var i = 0; i < pinsElement.length; i++) {
+      pinsElement[i].style.display = 'none';
     }
   };
 
   var hidePopups = function () {
-    for (var i = 0; i < window.card.popups.length; i++) {
-      window.card.popups[i].style.display = 'none';
+    var popups = document.querySelectorAll('.popup');
+    for (var i = 0; i < popups.length; i++) {
+      popups[i].style.display = 'none';
     }
   };
 
@@ -158,6 +161,7 @@
     timeOutElement: timeOutElement,
     addDisabledAttribute: addDisabledAttribute,
     removeDisabledAttribute: removeDisabledAttribute,
-    setActiveWindow: setActiveWindow
+    setActiveWindow: setActiveWindow,
+    showPins: showPins
   };
 })();

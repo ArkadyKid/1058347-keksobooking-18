@@ -11,8 +11,9 @@
   };
 
   var onPopupEscPress = function (evt) {
-    if (evt.keyCode === window.util.ESC_KEY_CODE) {
-      for (var i = 0; i < window.card.pinsElement.length; i++) {
+    var pinsElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    if (evt.keyCode === window.util.KEY_CODE.ESC) {
+      for (var i = 0; i < pinsElement.length; i++) {
         addCloseAttribute(i);
       }
     }
@@ -20,25 +21,29 @@
   };
 
   var addCloseAttribute = function (element) {
-    window.card.popups[element].style.display = 'none';
+    var popups = document.querySelectorAll('.popup');
+    popups[element].style.display = 'none';
   };
 
   var iteratePopups = function (element) {
-    for (var i = 0; i < window.card.pinsElement.length; i++) {
+    var pinsElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    var popups = document.querySelectorAll('.popup');
+    for (var i = 0; i < pinsElement.length; i++) {
       addCloseAttribute(i);
-      window.card.pinsElement[i].classList.remove('map__pin--active');
+      pinsElement[i].classList.remove('map__pin--active');
     }
-    window.card.popups[element].style.display = null;
-    window.card.pinsElement[element].classList.add('map__pin--active');
+    popups[element].style.display = null;
+    pinsElement[element].classList.add('map__pin--active');
   };
 
   var showCard = function (element) {
-    window.card.pinsElement[element].addEventListener('click', function () {
+    var pinsElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    pinsElement[element].addEventListener('click', function () {
       iteratePopups(element);
       addOnEscPress();
     });
-    window.card.pinsElement[element].addEventListener('keydown', function (evt) {
-      if (evt.keyCode === window.util.ENTER_KEY_CODE) {
+    pinsElement[element].addEventListener('keydown', function (evt) {
+      if (evt.keyCode === window.util.KEY_CODE.ENTER) {
         iteratePopups(element);
         addOnEscPress();
       }
@@ -46,8 +51,10 @@
   };
 
   var closeCard = function (element) {
-    window.card.popupCloseElements[element].addEventListener('click', function () {
-      for (var i = 0; i < window.card.pinsElement.length; i++) {
+    var pinsElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    var popupCloseElements = document.querySelectorAll('.popup__close');
+    popupCloseElements[element].addEventListener('click', function () {
+      for (var i = 0; i < pinsElement.length; i++) {
         addCloseAttribute(i);
       }
       removeOnEscPress();
