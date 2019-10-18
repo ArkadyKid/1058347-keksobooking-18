@@ -12,8 +12,6 @@
   var mapPinMainElement = window.util.mapPinMainElement;
   var updatePins = window.updatePins.updatePins;
   var debounce = window.debounce.debounce;
-  var mapPinsElement = window.util.mapElement.querySelector('.map__pins');
-
 
   var successHandler = function (data) {
     pins = data;
@@ -37,31 +35,35 @@
 
   var housingTypeElement = document.querySelector('#housing-type');
 
-  var hidePins = function (type, pins) {
-    var pinElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
-    for (var i = 0; i < pins.length; i++) {
-      if (pins[i].offer.type !== type) {
-        pinElement[i].style.display = 'none';
-      } else {
+  var setType = function (type) {
+    var array = pins.slice().filter(function (pin) {
+      return pin.offer.type === type;
+    });
+    console.log(array);
+    // updatePins(array);
+    // showPinAfterFilter();
+  };
+
+  var compareType = function () {
+    switch (housingTypeElement.value) {
+      case 'flat':
+        setType('Квартира');
+        break;
+      case 'bungalo':
+        setType('Бунгало');
+        break;
+      case 'house':
+        setType('Дом');
+        break;
+      case 'palace':
+        setType('Дворец');
+        break;
+      default:
         updatePins(pins);
         showPinAfterFilter();
-      }
     }
   };
-
-  var compareType = function (value, type) {
-    if (housingTypeElement.value === value) {
-      var array = pins.slice().filter(function (pin) {
-        return pin.offer.type === type;
-      });
-      hidePins(type, array);
-    }
-  };
-
-  housingTypeElement.addEventListener('input', function () {
-    debounce(compareType('flat', 'Квартира'));
-    debounce(compareType('bungalo', 'Бунгало'));
-    debounce(compareType('house', 'Дом'));
-    debounce(compareType('palace', 'Дворец'));
-  });
+  housingTypeElement.addEventListener('input', debounce(function () {
+    compareType();
+  }));
 })();

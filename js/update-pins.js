@@ -27,13 +27,16 @@
   var updatePins = function (pins) {
     var cardFragment = document.createDocumentFragment();
     var pinFragment = document.createDocumentFragment();
+    var array = pins.slice();
 
-    for (var i = 0; i < pins.length; i++) {
-      pinFragment.appendChild(renderPins(pins[i]));
+    var pinsCount = array.length > MAX_COUNT ? MAX_COUNT : array.length;
+
+    for (var i = 0; i < pinsCount; i++) {
+      pinFragment.appendChild(renderPins(array[i]));
     }
 
-    for (var j = 0; j < pins.length; j++) {
-      cardFragment.appendChild(renderCards(pins[j]));
+    for (var j = 0; j < pinsCount; j++) {
+      cardFragment.appendChild(renderCards(array[j]));
     }
 
     if (mapPinsElement.childElementCount > 2) {
@@ -52,7 +55,7 @@
     window.util.mapElement.insertBefore(cardFragment, mapFiltersElement);
     mapPinsElement.appendChild(pinFragment);
 
-    for (var l = 0; l < pins.length; l++) {
+    for (var l = 0; l < pinsCount; l++) {
       window.actionCard.show(l);
       window.actionCard.close(l);
     }
