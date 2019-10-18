@@ -11,9 +11,9 @@
   };
 
   var onPopupEscPress = function (evt) {
-    var pinsElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    var pinElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
     if (evt.keyCode === window.util.KEY_CODE.ESC) {
-      for (var i = 0; i < pinsElement.length; i++) {
+      for (var i = 0; i < pinElement.length; i++) {
         addCloseAttribute(i);
       }
     }
@@ -21,40 +21,39 @@
   };
 
   var addCloseAttribute = function (element) {
-    var popups = document.querySelectorAll('.popup');
-    popups[element].style.display = 'none';
+    var popupElement = document.querySelectorAll('.popup');
+    popupElement[element].style.display = 'none';
   };
 
-  var iteratePopups = function (element) {
-    var pinsElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
-    var popups = document.querySelectorAll('.popup');
-    for (var i = 0; i < pinsElement.length; i++) {
+  var iteratePopups = function (element, pinElement, popupElement) {
+    for (var i = 0; i < pinElement.length; i++) {
       addCloseAttribute(i);
-      pinsElement[i].classList.remove('map__pin--active');
+      pinElement[i].classList.remove('map__pin--active');
     }
-    popups[element].style.display = null;
-    pinsElement[element].classList.add('map__pin--active');
+    popupElement[element].style.display = null;
+    pinElement[element].classList.add('map__pin--active');
   };
 
   var showCard = function (element) {
-    var pinsElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
-    pinsElement[element].addEventListener('click', function () {
-      iteratePopups(element);
+    var pinElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    var popupElement = document.querySelectorAll('.popup');
+    pinElement[element].addEventListener('click', function () {
+      iteratePopups(element, pinElement, popupElement);
       addOnEscPress();
     });
-    pinsElement[element].addEventListener('keydown', function (evt) {
+    pinElement[element].addEventListener('keydown', function (evt) {
       if (evt.keyCode === window.util.KEY_CODE.ENTER) {
-        iteratePopups(element);
+        iteratePopups(element, pinElement, popupElement);
         addOnEscPress();
       }
     });
   };
 
   var closeCard = function (element) {
-    var pinsElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
-    var popupCloseElements = document.querySelectorAll('.popup__close');
-    popupCloseElements[element].addEventListener('click', function () {
-      for (var i = 0; i < pinsElement.length; i++) {
+    var pinElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    var popupCloseElement = document.querySelectorAll('.popup__close');
+    popupCloseElement[element].addEventListener('click', function () {
+      for (var i = 0; i < pinElement.length; i++) {
         addCloseAttribute(i);
       }
       removeOnEscPress();

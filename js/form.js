@@ -46,23 +46,23 @@
   };
 
   var showPins = function () {
-    var pinsElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
-    for (var i = 0; i < pinsElement.length; i++) {
-      pinsElement[i].style.display = null;
+    var pinElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    for (var i = 0; i < pinElement.length; i++) {
+      pinElement[i].style.display = null;
     }
   };
 
   var hidePins = function () {
-    var pinsElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
-    for (var i = 0; i < pinsElement.length; i++) {
-      pinsElement[i].style.display = 'none';
+    var pinElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    for (var i = 0; i < pinElement.length; i++) {
+      pinElement[i].style.display = 'none';
     }
   };
 
   var hidePopups = function () {
-    var popups = document.querySelectorAll('.popup');
-    for (var i = 0; i < popups.length; i++) {
-      popups[i].style.display = 'none';
+    var popupElement = document.querySelectorAll('.popup');
+    for (var i = 0; i < popupElement.length; i++) {
+      popupElement[i].style.display = 'none';
     }
   };
 
