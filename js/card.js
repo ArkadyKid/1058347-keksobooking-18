@@ -40,8 +40,8 @@
       return pin.offer.type === type;
     });
     console.log(array);
-    // updatePins(array);
-    // showPinAfterFilter();
+    updatePins(array);
+    showPinAfterFilter();
   };
 
   var compareType = function () {
