@@ -1,6 +1,34 @@
 'use strict';
 
 (function () {
+  var MAX_TITLE_SYMBOLS = 30;
+  var MIN_PRICE_ELEMENT = {
+    BUNGALO: 0,
+    FLAT: 1000,
+    HOUSE: 5000,
+    PALACE: 10000
+  };
+
+  var PLACEHOLDER = {
+    BUNGALO: '0',
+    FLAT: '1000',
+    HOUSE: '5000',
+    PALACE: '10000'
+  };
+
+  var GUEST_COUNT = {
+    PALACE: '100',
+    BUNGALO: '1',
+    FLAT: '2',
+    HOUSE: '3'
+  };
+
+  var CAPACITY_OPTION_VALUE = {
+    FOR_THREE_GUESTS: '3',
+    FOR_TWO_GUESTS: '2',
+    FOR_ONE_GUESTS: '1',
+    NOT_FOR_GUESTS: '0'
+  };
 
   var roomNumberElement = window.form.roomNumberElement;
   var capacityOptionElement = window.form.capacityOptionElement;
@@ -16,20 +44,20 @@
   var checkType = function () {
     switch (typeElement.value) {
       case 'bungalo':
-        priceElement.placeholder = '0';
-        priceElement.min = 0;
+        priceElement.placeholder = PLACEHOLDER.BUNGALO;
+        priceElement.min = MIN_PRICE_ELEMENT.BUNGALO;
         break;
       case 'flat':
-        priceElement.placeholder = '1000';
-        priceElement.min = 1000;
+        priceElement.placeholder = PLACEHOLDER.FLAT;
+        priceElement.min = MIN_PRICE_ELEMENT.FLAT;
         break;
       case 'house':
-        priceElement.placeholder = '5000';
-        priceElement.min = 5000;
+        priceElement.placeholder = PLACEHOLDER.HOUSE;
+        priceElement.min = MIN_PRICE_ELEMENT.HOUSE;
         break;
       case 'palace':
-        priceElement.placeholder = '10000';
-        priceElement.min = 10000;
+        priceElement.placeholder = PLACEHOLDER.PALACE;
+        priceElement.min = MIN_PRICE_ELEMENT.PALACE;
         break;
     }
   };
@@ -41,33 +69,33 @@
   };
 
   roomNumberElement.addEventListener('change', function () {
-    if (roomNumberElement.value === '100') {
+    if (roomNumberElement.value === GUEST_COUNT.PALACE) {
       addDisabledAttribute(capacityOptionElement[0]);
       addDisabledAttribute(capacityOptionElement[1]);
       addDisabledAttribute(capacityOptionElement[2]);
       removeDisabledAttribute(capacityOptionElement[3]);
-      capacityElement.value = '0';
+      capacityElement.value = CAPACITY_OPTION_VALUE.NOT_FOR_GUESTS;
     }
-    if (roomNumberElement.value === '1') {
+    if (roomNumberElement.value === GUEST_COUNT.BUNGALO) {
       addDisabledAttribute(capacityOptionElement[0]);
       addDisabledAttribute(capacityOptionElement[1]);
       removeDisabledAttribute(capacityOptionElement[2]);
       addDisabledAttribute(capacityOptionElement[3]);
-      capacityElement.value = '1';
+      capacityElement.value = CAPACITY_OPTION_VALUE.FOR_ONE_GUESTS;
     }
-    if (roomNumberElement.value === '2') {
+    if (roomNumberElement.value === GUEST_COUNT.FLAT) {
       addDisabledAttribute(capacityOptionElement[0]);
       removeDisabledAttribute(capacityOptionElement[1]);
       removeDisabledAttribute(capacityOptionElement[2]);
       addDisabledAttribute(capacityOptionElement[3]);
-      capacityElement.value = '2';
+      capacityElement.value = CAPACITY_OPTION_VALUE.FOR_TWO_GUESTS;
     }
-    if (roomNumberElement.value === '3') {
+    if (roomNumberElement.value === GUEST_COUNT.HOUSE) {
       removeDisabledAttribute(capacityOptionElement[0]);
       removeDisabledAttribute(capacityOptionElement[1]);
       removeDisabledAttribute(capacityOptionElement[2]);
       addDisabledAttribute(capacityOptionElement[3]);
-      capacityElement.value = '3';
+      capacityElement.value = CAPACITY_OPTION_VALUE.FOR_THREE_GUESTS;
     }
   });
 
@@ -85,7 +113,7 @@
 
   titleElement.addEventListener('input', function (evt) {
     var target = evt.target;
-    if (target.value.length < 30) {
+    if (target.value.length < MAX_TITLE_SYMBOLS) {
       titleElement.setCustomValidity('минимальная длина 30 символов, сейчас длина ' + (target.value.length));
     } else {
       titleElement.setCustomValidity('');
@@ -94,7 +122,7 @@
 
   typeElement.addEventListener('change', checkType);
 
-  priceElement.addEventListener('invalid', function () {
+  priceElement.addEventListener('input', function () {
     if (priceElement.validity.rangeUnderflow) {
       priceElement.setCustomValidity('минимальная цена ' + priceElement.min + ' руб');
     } else {

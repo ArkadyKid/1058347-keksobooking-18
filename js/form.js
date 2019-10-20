@@ -1,10 +1,14 @@
 'use strict';
 
 (function () {
-  var START_COORDS_MAIN_PIN_X = '570px';
-  var START_COORDS_MAIN_PIN_Y = '375px';
+  var START_COORDS_MAIN_PIN = {
+    X: '570px',
+    Y: '375px'
+  };
 
-  var ESC_KEY_CODE = window.util.ESC_KEY_CODE;
+  var HALF = 2;
+  var ESC_KEY_CODE = window.util.KEY_CODE.ESC;
+  var MIN_PRICE_ELEMENT_ON_LOAD = 1000;
 
   var coordsPinY = window.util.coordsPinY;
   var coordsPinX = window.util.coordsPinX;
@@ -42,20 +46,23 @@
   };
 
   var showPins = function () {
-    for (var i = 0; i < window.pinsElement.length; i++) {
-      window.pinsElement[i].style.display = null;
+    var pinElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    for (var i = 0; i < pinElement.length; i++) {
+      pinElement[i].style.display = null;
     }
   };
 
   var hidePins = function () {
-    for (var i = 0; i < window.pinsElement.length; i++) {
-      window.pinsElement[i].style.display = 'none';
+    var pinElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    for (var i = 0; i < pinElement.length; i++) {
+      pinElement[i].style.display = 'none';
     }
   };
 
   var hidePopups = function () {
-    for (var i = 0; i < window.popups.length; i++) {
-      window.popups[i].style.display = 'none';
+    var popupElement = document.querySelectorAll('.popup');
+    for (var i = 0; i < popupElement.length; i++) {
+      popupElement[i].style.display = 'none';
     }
   };
 
@@ -65,6 +72,7 @@
     removeDisabledAttribute(mapFiltersFieldsetElement);
     window.util.doIterationCycle(adFormFieldsetList, removeDisabledAttribute);
     window.util.doIterationCycle(mapFiltersSelectList, removeDisabledAttribute);
+    mapFiltersElement.reset();
     showPins();
   };
 
@@ -74,12 +82,12 @@
     window.util.mapElement.classList.add('map--faded');
     adFormElement.classList.add('ad-form--disabled');
     addDisabledAttribute(mapFiltersFieldsetElement);
-    addressInputElement.value = (coordsPinX + Math.round(mainPinWidth / 2)) + ' ' + (coordsPinY + Math.round(mainPinHeight / 2));
+    addressInputElement.value = (coordsPinX + Math.round(mainPinWidth / HALF)) + ' ' + (coordsPinY + Math.round(mainPinHeight / HALF));
   };
 
   var setStartCoordsPin = function () {
-    mapPinMainElement.style.left = START_COORDS_MAIN_PIN_X;
-    mapPinMainElement.style.top = START_COORDS_MAIN_PIN_Y;
+    mapPinMainElement.style.left = START_COORDS_MAIN_PIN.X;
+    mapPinMainElement.style.top = START_COORDS_MAIN_PIN.Y;
   };
 
   var setStartRoomNumber = function () {
@@ -89,7 +97,7 @@
       addDisabledAttribute(capacityOptionElement[3]);
       capacityElement.value = '1';
       priceElement.placeholder = '1000';
-      priceElement.min = 1000;
+      priceElement.min = MIN_PRICE_ELEMENT_ON_LOAD;
     }
   };
 
@@ -118,22 +126,12 @@
   };
 
   window.slider(mapPinMainElement, mapElement, function (pinX, pinY) {
-    addressInputElement.value = Math.round(pinX + (mainPinWidth / 2)) + ' ' + Math.round(pinY + mainPinHeightCursor);
+    addressInputElement.value = Math.round(pinX + (mainPinWidth / HALF)) + ' ' + Math.round(pinY + mainPinHeightCursor);
   });
 
   window.addEventListener('load', function () {
     setInactiveWindow();
     setStartRoomNumber();
-  });
-
-  mapPinMainElement.addEventListener('mousedown', function () {
-    setActiveWindow();
-  });
-
-  mapPinMainElement.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.util.ENTER_KEY_CODE) {
-      setActiveWindow();
-    }
   });
 
   var successHandler = function () {
@@ -163,6 +161,8 @@
     timeInElement: timeInElement,
     timeOutElement: timeOutElement,
     addDisabledAttribute: addDisabledAttribute,
-    removeDisabledAttribute: removeDisabledAttribute
+    removeDisabledAttribute: removeDisabledAttribute,
+    setActiveWindow: setActiveWindow,
+    showPins: showPins
   };
 })();
