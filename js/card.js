@@ -39,8 +39,6 @@
     var array = pins.filter(function (pin) {
       return pin.offer.type === type;
     });
-    console.log(pins);
-    console.log(array);
     updatePins(array);
     showPinAfterFilter();
   };
@@ -68,5 +66,5 @@
 
   window.card = {
     pins: pins
-  }
+  };
 })();

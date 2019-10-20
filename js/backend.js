@@ -6,7 +6,7 @@
 
   var URL = {
     GET: 'https://js.dump.academy/keksobooking/data',
-    POST:'https://js.dump.academy/keksobooking'
+    POST: 'https://js.dump.academy/keksobooking'
   };
 
   var STATUS = {

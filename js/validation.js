@@ -9,7 +9,7 @@
     PALACE: 10000
   };
 
-  var PLACEHOLDER ={
+  var PLACEHOLDER = {
     BUNGALO: '0',
     FLAT: '1000',
     HOUSE: '5000',
