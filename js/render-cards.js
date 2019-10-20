@@ -17,16 +17,16 @@
     var generateType = function (obj) {
       switch (obj.offer.type) {
         case 'flat':
-          obj.offer.type = 'Квартира';
+          obj.offer.type = 'flat';
           break;
         case 'bungalo':
-          obj.offer.type = 'Бунгало';
+          obj.offer.type = 'bungalo';
           break;
         case 'house':
-          obj.offer.type = 'Дом';
+          obj.offer.type = 'house';
           break;
         case 'palace':
-          obj.offer.type = 'Дворец';
+          obj.offer.type = 'palace';
           break;
       }
       return obj.offer.type;

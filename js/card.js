@@ -36,9 +36,10 @@
   var housingTypeElement = document.querySelector('#housing-type');
 
   var setType = function (type) {
-    var array = pins.slice().filter(function (pin) {
+    var array = pins.filter(function (pin) {
       return pin.offer.type === type;
     });
+    console.log(pins);
     console.log(array);
     updatePins(array);
     showPinAfterFilter();
@@ -47,23 +48,21 @@
   var compareType = function () {
     switch (housingTypeElement.value) {
       case 'flat':
-        setType('Квартира');
+        setType('flat');
         break;
       case 'bungalo':
-        setType('Бунгало');
+        setType('bungalo');
         break;
       case 'house':
-        setType('Дом');
+        setType('house');
         break;
       case 'palace':
-        setType('Дворец');
+        setType('palace');
         break;
       default:
         updatePins(pins);
         showPinAfterFilter();
     }
   };
-  housingTypeElement.addEventListener('input', debounce(function () {
-    compareType();
-  }));
+  housingTypeElement.addEventListener('input', debounce(compareType));
 })();

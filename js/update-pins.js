@@ -24,6 +24,23 @@
     return pinElement;
   };
 
+  var removePins = function () {
+    if (mapPinsElement.childElementCount > 2) {
+      while (mapPinsElement.childElementCount > 2) {
+        mapPinsElement.removeChild(mapPinsElement.lastChild);
+      }
+    }
+  };
+
+  var removePopups = function () {
+    if (window.util.mapElement.childElementCount > 1) {
+      var popupElement = window.util.mapElement.querySelectorAll('.popup');
+      for (var m = 0; m < popupElement.length; m++) {
+        window.util.mapElement.removeChild(popupElement[m]);
+      }
+    }
+  };
+
   var updatePins = function (pins) {
     var cardFragment = document.createDocumentFragment();
     var pinFragment = document.createDocumentFragment();
@@ -39,19 +56,8 @@
       cardFragment.appendChild(renderCards(array[j]));
     }
 
-    if (mapPinsElement.childElementCount > 2) {
-      while (mapPinsElement.childElementCount > 2) {
-        mapPinsElement.removeChild(mapPinsElement.lastChild);
-      }
-    }
-
-    if (window.util.mapElement.childElementCount > 1) {
-      var popupElement = window.util.mapElement.querySelectorAll('.popup');
-      for (var m = 0; m < popupElement.length; m++) {
-        window.util.mapElement.removeChild(popupElement[m]);
-      }
-    }
-
+    removePins();
+    removePopups();
     window.util.mapElement.insertBefore(cardFragment, mapFiltersElement);
     mapPinsElement.appendChild(pinFragment);
 
