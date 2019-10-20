@@ -72,6 +72,7 @@
     removeDisabledAttribute(mapFiltersFieldsetElement);
     window.util.doIterationCycle(adFormFieldsetList, removeDisabledAttribute);
     window.util.doIterationCycle(mapFiltersSelectList, removeDisabledAttribute);
+    mapFiltersElement.reset();
     showPins();
   };
 

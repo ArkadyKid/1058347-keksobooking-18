@@ -17,16 +17,16 @@
     var generateType = function (obj) {
       switch (obj.offer.type) {
         case 'flat':
-          obj.offer.type = 'flat';
+          typePopupElement.textContent = 'Квартира';
           break;
         case 'bungalo':
-          obj.offer.type = 'bungalo';
+          typePopupElement.textContent = 'Бунгало';
           break;
         case 'house':
-          obj.offer.type = 'house';
+          typePopupElement.textContent = 'Дом';
           break;
         case 'palace':
-          obj.offer.type = 'palace';
+          typePopupElement.textContent = 'Дворец';
           break;
       }
       return obj.offer.type;
@@ -111,8 +111,7 @@
     setContent(card.offer.title, popupTitleElement);
     setContent(card.offer.address, popupAddressElement);
     setContent(card.offer.description, popupDescriptionElement);
-
-    typePopupElement.textContent = generateType(card);
+    generateType(card);
 
     if (card.offer.price.text !== '') {
       popupPriceElement.textContent = card.offer.price + ' ₽';

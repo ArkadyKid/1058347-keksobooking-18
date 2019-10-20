@@ -7,6 +7,11 @@
     HEIGHT: window.util.SIZE_PIN.HEIGHT
   };
 
+  var MIN_CHILD_OF = {
+    MAP_PINS_ELEMENT: 2,
+    MAP_ELEMENT: 1
+  };
+
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
   var mapPinsElement = window.util.mapElement.querySelector('.map__pins');
   var mapFiltersElement = window.util.mapElement.querySelector('.map__filters-container');
@@ -25,16 +30,16 @@
   };
 
   var removePins = function () {
-    if (mapPinsElement.childElementCount > 2) {
-      while (mapPinsElement.childElementCount > 2) {
+    if (mapPinsElement.childElementCount > MIN_CHILD_OF.MAP_PINS_ELEMENT) {
+      while (mapPinsElement.childElementCount > MIN_CHILD_OF.MAP_PINS_ELEMENT) {
         mapPinsElement.removeChild(mapPinsElement.lastChild);
       }
     }
   };
 
   var removePopups = function () {
-    if (window.util.mapElement.childElementCount > 1) {
-      var popupElement = window.util.mapElement.querySelectorAll('.popup');
+    var popupElement = window.util.mapElement.querySelectorAll('.popup');
+    if (window.util.mapElement.childElementCount > MIN_CHILD_OF.MAP_ELEMENT) {
       for (var m = 0; m < popupElement.length; m++) {
         window.util.mapElement.removeChild(popupElement[m]);
       }

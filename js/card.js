@@ -65,4 +65,8 @@
     }
   };
   housingTypeElement.addEventListener('input', debounce(compareType));
+
+  window.card = {
+    pins: pins
+  }
 })();
