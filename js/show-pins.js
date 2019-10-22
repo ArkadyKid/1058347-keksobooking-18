@@ -78,8 +78,8 @@
 
   var getFilteredArray = function (el) {
     var filteredFeatures = featuresArray.filter(function (input) {
-        return input.checked;
-      })
+      return input.checked;
+    })
       .map(function (input) {
         return input.value;
       });
@@ -98,6 +98,6 @@
   load(successHandler, errorHandler);
   mapFiltersElement.addEventListener('input', debounce(getFilterPins));
   mapFiltersElement.addEventListener('reset', function () {
-    updatePins(pins)
+    updatePins(pins);
   });
 })();
