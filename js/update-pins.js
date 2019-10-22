@@ -49,16 +49,15 @@
   var updatePins = function (pins) {
     var cardFragment = document.createDocumentFragment();
     var pinFragment = document.createDocumentFragment();
-    var array = pins.slice();
 
-    var pinsCount = array.length > MAX_COUNT ? MAX_COUNT : array.length;
+    var pinsCount = pins.length > MAX_COUNT ? MAX_COUNT : pins.length;
 
     for (var i = 0; i < pinsCount; i++) {
-      pinFragment.appendChild(renderPins(array[i]));
+      pinFragment.appendChild(renderPins(pins[i]));
     }
 
     for (var j = 0; j < pinsCount; j++) {
-      cardFragment.appendChild(renderCards(array[j]));
+      cardFragment.appendChild(renderCards(pins[j]));
     }
 
     removePins();

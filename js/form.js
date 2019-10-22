@@ -72,7 +72,6 @@
     removeDisabledAttribute(mapFiltersFieldsetElement);
     window.util.doIterationCycle(adFormFieldsetList, removeDisabledAttribute);
     window.util.doIterationCycle(mapFiltersSelectList, removeDisabledAttribute);
-    mapFiltersElement.reset();
     showPins();
   };
 
@@ -82,6 +81,7 @@
     window.util.mapElement.classList.add('map--faded');
     adFormElement.classList.add('ad-form--disabled');
     addDisabledAttribute(mapFiltersFieldsetElement);
+    mapFiltersElement.reset();
     addressInputElement.value = (coordsPinX + Math.round(mainPinWidth / HALF)) + ' ' + (coordsPinY + Math.round(mainPinHeight / HALF));
   };
 
