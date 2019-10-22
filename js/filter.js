@@ -9,6 +9,7 @@
   var sameRooms = [];
   var sameGuests = [];
   var samePrice = [];
+  var sameFilter = [];
 
   var load = window.backend.load;
   var errorHandler = window.backend.errorHandler;
@@ -35,34 +36,43 @@
 
   var showPinAfterFilter = window.updatePins.showPinAfterFilter;
 
-  var housingTypeElement = document.querySelector('#housing-type');
-  var housingRoomsElement = document.querySelector('#housing-rooms');
-  var housingGuestsElement = document.querySelector('#housing-guests');
-  var housingPriceElement = document.querySelector('#housing-price');
-  var filterWiFiElement = document.querySelector('#filter-wifi');
-  var filterDishwasherElement = document.querySelector('#filter-dishwasher');
+  var mapFiltersElement = document.querySelector('.map__filters');
+  var housingTypeElement = mapFiltersElement.querySelector('#housing-type');
+  var housingRoomsElement = mapFiltersElement.querySelector('#housing-rooms');
+  var housingGuestsElement = mapFiltersElement.querySelector('#housing-guests');
+  var housingPriceElement = mapFiltersElement.querySelector('#housing-price');
+  var filterWiFiElement = mapFiltersElement.querySelector('#filter-wifi');
+  var filterDishwasherElement = mapFiltersElement.querySelector('#filter-dishwasher');
 
-  var setType = function (type) {
-    sameType = pins.filter(function (pin) {
-      return pin.offer.type === type;
-    });
+  var setType = function () {
+    sameType = pins.filter(function (el) {
+        return housingTypeElement.value === 'any' || el.offer.type === housingTypeElement.value;
+      }
+    );
     updatePins(sameType);
     showPinAfterFilter();
   };
 
-  var setRooms = function (rooms) {
-    sameRooms = pins.filter(function (pin) {
-      return pin.offer.rooms === rooms;
+  var setRooms = function () {
+    sameRooms = pins.filter(function (el) {
+      return housingRoomsElement.value === 'any' || el.offer.rooms === +housingRoomsElement.value;
     });
     updatePins(sameRooms);
     showPinAfterFilter();
   };
 
-  var setGuests = function (guests) {
-    sameGuests = pins.filter(function (pin) {
-      return pin.offer.guests === guests;
+  var setGuests = function () {
+    sameGuests = pins.filter(function (el) {
+      return housingGuestsElement.value === 'any' || el.offer.guests === +housingGuestsElement.value;
+
     });
     updatePins(sameGuests);
+    showPinAfterFilter();
+  };
+
+  var setFilter = function (cb) {
+    samePrice = pins.filter(cb);
+    updatePins(samePrice);
     showPinAfterFilter();
   };
 
@@ -72,60 +82,43 @@
     showPinAfterFilter();
   };
 
-  var compareType = function () {
-    switch (housingTypeElement.value) {
-      case 'flat':
-        setType('flat');
-        break;
-      case 'bungalo':
-        setType('bungalo');
-        break;
-      case 'house':
-        setType('house');
-        break;
-      case 'palace':
-        setType('palace');
-        break;
-      default:
-        updatePins(pins);
-        showPinAfterFilter();
-        break;
-    }
-  };
+  // var compareType = function (el) {
+  //   return housingTypeElement.value === 'any' || el.offer.type === housingTypeElement;
+  // };
+  //
+  // var compareRooms = function () {
+  //   switch (housingRoomsElement.value) {
+  //     case '1':
+  //       setRooms(1);
+  //       break;
+  //     case '2':
+  //       setRooms(2);
+  //       break;
+  //     case '3':
+  //       setRooms(3);
+  //       break;
+  //     default:
+  //       updatePins(pins);
+  //       showPinAfterFilter();
+  //   }
+  // };
 
-  var compareRooms = function () {
-    switch (housingRoomsElement.value) {
-      case '1':
-        setRooms(1);
-        break;
-      case '2':
-        setRooms(2);
-        break;
-      case '3':
-        setRooms(3);
-        break;
-      default:
-        updatePins(pins);
-        showPinAfterFilter();
-    }
-  };
-
-  var compareGuests = function () {
-    switch (housingGuestsElement.value) {
-      case '1':
-        setGuests(1);
-        break;
-      case '2':
-        setGuests(2);
-        break;
-      case '0':
-        setGuests(0);
-        break;
-      default:
-        updatePins(pins);
-        showPinAfterFilter();
-    }
-  };
+  // var compareGuests = function () {
+  //   switch (housingGuestsElement.value) {
+  //     case '1':
+  //       setGuests(1);
+  //       break;
+  //     case '2':
+  //       setGuests(2);
+  //       break;
+  //     case '0':
+  //       setGuests(0);
+  //       break;
+  //     default:
+  //       updatePins(pins);
+  //       showPinAfterFilter();
+  //   }
+  // };
 
   var comparePrice = function () {
     switch (housingPriceElement.value) {
@@ -135,12 +128,12 @@
         });
         break;
       case 'low':
-        setPrice (function (pin) {
+        setPrice(function (pin) {
           return pin.offer.price < 10000;
         });
         break;
       case 'high':
-        setPrice (function (pin) {
+        setPrice(function (pin) {
           return pin.offer.price > 50000;
         });
         break;
@@ -150,17 +143,9 @@
     }
   };
 
-  var sameWifi = [];
   var sameDishwasher = [];
-  var sameFeatures = [];
   var compareFeatures = function () {
-    if (filterWiFiElement.checked) {
-      sameWifi = pins.filter(function (pin) {
-        for (var i = 0; i < pin.offer.features.length; i++) {
-          return pin.offer.features[i] === 'wifi';
-        }
-      });
-    } else if (filterDishwasherElement.checked) {
+    if (filterDishwasherElement.checked) {
       sameDishwasher = pins.filter(function (pin) {
         for (var i = 0; i < pin.offer.features.length; i++) {
           return pin.offer.features[i] === 'dishwasher';
@@ -168,17 +153,16 @@
       });
     }
 
-    sameFeatures = sameWifi.concat(sameDishwasher);
-    updatePins(sameFeatures);
+    updatePins(sameDishwasher);
     showPinAfterFilter();
   };
 
-  housingTypeElement.addEventListener('input', debounce(compareType));
-  housingRoomsElement.addEventListener('input', debounce(compareRooms));
-  housingGuestsElement.addEventListener('input', debounce(compareGuests));
-  housingPriceElement.addEventListener('input', debounce(comparePrice));
-  filterWiFiElement.addEventListener('change', debounce(compareFeatures));
-  filterDishwasherElement.addEventListener('change', debounce(compareFeatures));
+  mapFiltersElement.addEventListener('input', debounce(setGuests));
+  // housingRoomsElement.addEventListener('input', debounce(compareRooms));
+  // housingGuestsElement.addEventListener('input', debounce(compareGuests));
+  // housingPriceElement.addEventListener('input', debounce(comparePrice));
+  // filterWiFiElement.addEventListener('change', debounce(compareFeatures));
+  // filterDishwasherElement.addEventListener('change', debounce(compareFeatures));
 
   window.card = {
     pins: pins
