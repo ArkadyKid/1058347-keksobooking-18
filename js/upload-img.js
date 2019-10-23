@@ -2,6 +2,7 @@
 
 (function () {
   var FILE_TYPES = ['gif', 'png', 'jpg', 'jpeg'];
+  var DEFAULT_IMG_URL = 'img/muffin-grey.svg';
 
   var adFormElement = document.querySelector('.ad-form');
   var imgAvatarElement = adFormElement.querySelector('.ad-form-header__preview img');
@@ -9,6 +10,12 @@
   var inputAvatarElement = adFormElement.querySelector('.ad-form-header__input');
   var inputRoomImgElement = adFormElement.querySelector('.ad-form__input');
   var imgWrapperRoomElement = adFormElement.querySelector('.ad-form__photo');
+
+  imgWrapperRoomElement.appendChild(roomImgElement);
+  imgWrapperRoomElement.style.display = 'flex';
+  imgWrapperRoomElement.style.justifyContent = 'center';
+  imgWrapperRoomElement.style.alignItems = 'center';
+  roomImgElement.alt = 'Фото квартиры';
 
   var Image = function (input, image) {
     input.addEventListener('change', function () {
@@ -25,25 +32,18 @@
 
           reader.addEventListener('load', function () {
             image.src = reader.result;
-          })
+          });
         }
         reader.readAsDataURL(file);
       }
     });
   };
 
-  new Image(inputAvatarElement, imgAvatarElement);
-  new Image(inputRoomImgElement, roomImgElement);
-
-  imgWrapperRoomElement.appendChild(roomImgElement);
-  imgWrapperRoomElement.style.display = 'flex';
-  imgWrapperRoomElement.style.justifyContent = 'center';
-  imgWrapperRoomElement.style.alignItems = 'center';
-  roomImgElement.alt = 'Фото квартиры';
-
+  var setAvatar = new Image(inputAvatarElement, imgAvatarElement);
+  var setPhotoRooms = new Image(inputRoomImgElement, roomImgElement);
 
   adFormElement.addEventListener('reset', function () {
-    roomImgElement.src = 'img/muffin-grey.svg';
-    imgAvatarElement.src = 'img/muffin-grey.svg';
+    roomImgElement.src = DEFAULT_IMG_URL;
+    imgAvatarElement.src = DEFAULT_IMG_URL;
   });
 })();
