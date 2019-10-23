@@ -2,7 +2,7 @@
 
 (function () {
 
-  window.slider = function (element, block, setCoords) {
+  var createSlider = function (element, block, setCoords) {
     element.addEventListener('mousedown', function (evt) {
       evt.preventDefault();
 
@@ -72,5 +72,9 @@
       document.addEventListener('mousemove', onMouseMove);
       document.addEventListener('mouseup', onMouseUp);
     });
+  };
+
+  window.slider = {
+    create: createSlider
   };
 })();

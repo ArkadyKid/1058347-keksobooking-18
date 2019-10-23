@@ -2,20 +2,17 @@
 
 (function () {
   var MAX_COUNT = 5;
+
   var SizePin = {
     HALF_WIDTH: window.util.SizePin.HALF_WIDTH,
     HEIGHT: window.util.SizePin.HEIGHT
   };
 
-  var MIN_CHILD_OF = {
-    MAP_PINS_ELEMENT: 2,
-    MAP_ELEMENT: 1
-  };
-
+  var mapElement = window.util.mapElement;
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
   var mapPinsElement = window.util.mapElement.querySelector('.map__pins');
   var mapFiltersElement = window.util.mapElement.querySelector('.map__filters-container');
-  var renderCards = window.rendercards.renderCards;
+  var renderCards = window.renderCards.renderCards;
 
   var renderPins = function (el) {
     var pinElement = pinTemplate.cloneNode(true);
@@ -29,20 +26,22 @@
     return pinElement;
   };
 
-  var removePins = function () {
-    if (mapPinsElement.childElementCount > MIN_CHILD_OF.MAP_PINS_ELEMENT) {
-      while (mapPinsElement.childElementCount > MIN_CHILD_OF.MAP_PINS_ELEMENT) {
-        mapPinsElement.removeChild(mapPinsElement.lastChild);
+  var removeList = function (list, parent) {
+    if (list) {
+      for (var m = 0; m < list.length; m++) {
+        parent.removeChild(list[m]);
       }
     }
   };
 
-  var removePopups = function () {
-    var popupElement = window.util.mapElement.querySelectorAll('.popup');
-    if (window.util.mapElement.childElementCount > MIN_CHILD_OF.MAP_ELEMENT) {
-      for (var m = 0; m < popupElement.length; m++) {
-        window.util.mapElement.removeChild(popupElement[m]);
-      }
+  var remove = {
+    pins: function () {
+      var pinList = mapPinsElement.querySelectorAll('.map__pin:not(.map__pin--main)');
+      removeList(pinList, mapPinsElement);
+    },
+    popups: function () {
+      var popupList = window.util.mapElement.querySelectorAll('.popup');
+      removeList(popupList, mapElement);
     }
   };
 
@@ -60,8 +59,8 @@
       cardFragment.appendChild(renderCards(pins[j]));
     }
 
-    removePins();
-    removePopups();
+    remove.pins();
+    remove.popups();
     window.util.mapElement.insertBefore(cardFragment, mapFiltersElement);
     mapPinsElement.appendChild(pinFragment);
 
@@ -72,9 +71,9 @@
   };
 
   var showPinAfterFilter = function () {
-    var pinElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
-    for (var k = 0; k < pinElement.length; k++) {
-      pinElement[k].style.display = null;
+    var pinList = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    for (var k = 0; k < pinList.length; k++) {
+      pinList[k].style.display = null;
     }
   };
 

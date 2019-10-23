@@ -2,6 +2,7 @@
 
 (function () {
   var MAX_TITLE_SYMBOLS = 30;
+
   var MinPriceElement = {
     BUNGALO: 0,
     FLAT: 1000,
@@ -31,7 +32,7 @@
   };
 
   var roomNumberElement = window.form.roomNumberElement;
-  var capacityOptionElement = window.form.capacityOptionElement;
+  var capacityOptionList = window.form.capacityOptionList;
   var capacityElement = window.form.capacityElement;
   var titleElement = window.form.titleElement;
   var typeElement = window.form.typeElement;
@@ -70,31 +71,31 @@
 
   roomNumberElement.addEventListener('change', function () {
     if (roomNumberElement.value === GuestCount.PALACE) {
-      addDisabledAttribute(capacityOptionElement[0]);
-      addDisabledAttribute(capacityOptionElement[1]);
-      addDisabledAttribute(capacityOptionElement[2]);
-      removeDisabledAttribute(capacityOptionElement[3]);
+      addDisabledAttribute(capacityOptionList[0]);
+      addDisabledAttribute(capacityOptionList[1]);
+      addDisabledAttribute(capacityOptionList[2]);
+      removeDisabledAttribute(capacityOptionList[3]);
       capacityElement.value = CapacityOptionValue.NOT_FOR_GUESTS;
     }
     if (roomNumberElement.value === GuestCount.BUNGALO) {
-      addDisabledAttribute(capacityOptionElement[0]);
-      addDisabledAttribute(capacityOptionElement[1]);
-      removeDisabledAttribute(capacityOptionElement[2]);
-      addDisabledAttribute(capacityOptionElement[3]);
+      addDisabledAttribute(capacityOptionList[0]);
+      addDisabledAttribute(capacityOptionList[1]);
+      removeDisabledAttribute(capacityOptionList[2]);
+      addDisabledAttribute(capacityOptionList[3]);
       capacityElement.value = CapacityOptionValue.FOR_ONE_GUESTS;
     }
     if (roomNumberElement.value === GuestCount.FLAT) {
-      addDisabledAttribute(capacityOptionElement[0]);
-      removeDisabledAttribute(capacityOptionElement[1]);
-      removeDisabledAttribute(capacityOptionElement[2]);
-      addDisabledAttribute(capacityOptionElement[3]);
+      addDisabledAttribute(capacityOptionList[0]);
+      removeDisabledAttribute(capacityOptionList[1]);
+      removeDisabledAttribute(capacityOptionList[2]);
+      addDisabledAttribute(capacityOptionList[3]);
       capacityElement.value = CapacityOptionValue.FOR_TWO_GUESTS;
     }
     if (roomNumberElement.value === GuestCount.HOUSE) {
-      removeDisabledAttribute(capacityOptionElement[0]);
-      removeDisabledAttribute(capacityOptionElement[1]);
-      removeDisabledAttribute(capacityOptionElement[2]);
-      addDisabledAttribute(capacityOptionElement[3]);
+      removeDisabledAttribute(capacityOptionList[0]);
+      removeDisabledAttribute(capacityOptionList[1]);
+      removeDisabledAttribute(capacityOptionList[2]);
+      addDisabledAttribute(capacityOptionList[3]);
       capacityElement.value = CapacityOptionValue.FOR_THREE_GUESTS;
     }
   });

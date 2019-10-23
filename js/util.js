@@ -2,6 +2,8 @@
 
 (function () {
 
+  var DIFFERENT_OF_PIN_HEIGHT = 22;
+
   var SizePin = {
     HEIGHT: 70,
     HALF_WIDTH: 25
@@ -11,8 +13,6 @@
     ENTER: 13,
     ESC: 27
   };
-
-  var DIFFERENT_OF_PIN_HEIGHT = 22;
 
   var mapElement = document.querySelector('.map');
   var mapPinMainElement = document.querySelector('.map__pin--main');

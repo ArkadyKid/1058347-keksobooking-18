@@ -34,7 +34,7 @@
 
     var setFeature = function () {
       var popupFeaturesElement = cardElement.querySelector('.popup__features');
-      var popupFeatureElement = cardElement.querySelectorAll('.popup__feature');
+      var popupFeatureList = cardElement.querySelectorAll('.popup__feature');
       var popupFeatureWifiElement = cardElement.querySelector('.popup__feature--wifi');
       var popupFeatureDishwasherElement = cardElement.querySelector('.popup__feature--dishwasher');
       var popupFeatureParkingElement = cardElement.querySelector('.popup__feature--parking');
@@ -43,8 +43,8 @@
       var popupFeatureConditionerElement = cardElement.querySelector('.popup__feature--conditioner');
 
       var hidePopups = function () {
-        for (var j = 0; j < popupFeatureElement.length; j++) {
-          popupFeatureElement[j].style.display = 'none';
+        for (var j = 0; j < popupFeatureList.length; j++) {
+          popupFeatureList[j].style.display = 'none';
         }
       };
 
@@ -141,7 +141,7 @@
     return cardElement;
   };
 
-  window.rendercards = {
+  window.renderCards = {
     renderCards: renderCards
   };
 })();

@@ -3,6 +3,7 @@
 (function () {
 
   var ESC_KEY = window.util.KeyCode.ESC;
+  var TIMEOUT = 10000;
 
   var Url = {
     GET: 'https://js.dump.academy/keksobooking/data',
@@ -13,8 +14,6 @@
     SUCCESS: 200,
     SERVER_ERROR: 500
   };
-
-  var TIMEOUT = 10000;
 
   var errorHandler = function (errorMessage) {
     var errorTemplate = document.querySelector('#error').content.querySelector('.error');

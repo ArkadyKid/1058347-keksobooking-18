@@ -11,9 +11,9 @@
   };
 
   var onPopupEscPress = function (evt) {
-    var pinElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    var pinList = document.querySelectorAll('.map__pin:not(.map__pin--main');
     if (evt.keyCode === window.util.KeyCode.ESC) {
-      for (var i = 0; i < pinElement.length; i++) {
+      for (var i = 0; i < pinList.length; i++) {
         addCloseAttribute(i);
       }
     }
@@ -21,8 +21,8 @@
   };
 
   var addCloseAttribute = function (element) {
-    var popupElement = document.querySelectorAll('.popup');
-    popupElement[element].style.display = 'none';
+    var popupList = document.querySelectorAll('.popup');
+    popupList[element].style.display = 'none';
   };
 
   var iteratePopups = function (element, pinElement, popupElement) {
@@ -35,25 +35,25 @@
   };
 
   var showCard = function (element) {
-    var pinElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
-    var popupElement = document.querySelectorAll('.popup');
-    pinElement[element].addEventListener('click', function () {
-      iteratePopups(element, pinElement, popupElement);
+    var pinList = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    var popupList = document.querySelectorAll('.popup');
+    pinList[element].addEventListener('click', function () {
+      iteratePopups(element, pinList, popupList);
       addOnEscPress();
     });
-    pinElement[element].addEventListener('keydown', function (evt) {
+    pinList[element].addEventListener('keydown', function (evt) {
       if (evt.keyCode === window.util.KeyCode.ENTER) {
-        iteratePopups(element, pinElement, popupElement);
+        iteratePopups(element, pinList, popupList);
         addOnEscPress();
       }
     });
   };
 
   var closeCard = function (element) {
-    var pinElement = document.querySelectorAll('.map__pin:not(.map__pin--main');
-    var popupCloseElement = document.querySelectorAll('.popup__close');
-    popupCloseElement[element].addEventListener('click', function () {
-      for (var i = 0; i < pinElement.length; i++) {
+    var pinList = document.querySelectorAll('.map__pin:not(.map__pin--main');
+    var popupCloseList = document.querySelectorAll('.popup__close');
+    popupCloseList[element].addEventListener('click', function () {
+      for (var i = 0; i < pinList.length; i++) {
         addCloseAttribute(i);
       }
       removeOnEscPress();

@@ -17,30 +17,34 @@
   imgWrapperRoomElement.style.alignItems = 'center';
   roomImgElement.alt = 'Фото квартиры';
 
-  var Image = function (input, image) {
-    input.addEventListener('change', function () {
-      var file = input.files[0];
-      var fileName = file.name.toLowerCase();
+  var onChangeInput = function (input, image) {
+    var file = input.files[0];
+    var fileName = file.name.toLowerCase();
 
-      if (file) {
-        var matches = FILE_TYPES.some(function (it) {
-          return fileName.endsWith(it);
+    if (file) {
+      var matches = FILE_TYPES.some(function (it) {
+        return fileName.endsWith(it);
+      });
+
+      if (matches) {
+        var reader = new FileReader();
+
+        reader.addEventListener('load', function () {
+          image.src = reader.result;
         });
-
-        if (matches) {
-          var reader = new FileReader();
-
-          reader.addEventListener('load', function () {
-            image.src = reader.result;
-          });
-        }
-        reader.readAsDataURL(file);
       }
-    });
+      reader.readAsDataURL(file);
+    }
   };
 
-  var setAvatar = new Image(inputAvatarElement, imgAvatarElement);
-  var setPhotoRooms = new Image(inputRoomImgElement, roomImgElement);
+  inputAvatarElement.addEventListener('change', function () {
+    onChangeInput(inputAvatarElement, imgAvatarElement);
+  });
+
+  inputRoomImgElement.addEventListener('change', function () {
+    onChangeInput(inputRoomImgElement, roomImgElement);
+  });
+
 
   adFormElement.addEventListener('reset', function () {
     roomImgElement.src = DEFAULT_IMG_URL;
