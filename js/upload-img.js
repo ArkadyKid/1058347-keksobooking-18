@@ -32,8 +32,8 @@
     });
   };
 
-  var setAvatar = new Image(inputAvatarElement, imgAvatarElement);
-  var setPhotoRooms = new Image(inputRoomImgElement, roomImgElement);
+  new Image(inputAvatarElement, imgAvatarElement);
+  new Image(inputRoomImgElement, roomImgElement);
 
   imgWrapperRoomElement.appendChild(roomImgElement);
   imgWrapperRoomElement.style.display = 'flex';
