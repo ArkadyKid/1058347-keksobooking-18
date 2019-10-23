@@ -2,12 +2,12 @@
 
 (function () {
 
-  var SIZE_PIN = {
+  var SizePin = {
     HEIGHT: 70,
     HALF_WIDTH: 25
   };
 
-  var KEY_CODE = {
+  var KeyCode = {
     ENTER: 13,
     ESC: 27
   };
@@ -30,8 +30,8 @@
   };
 
   window.util = {
-    SIZE_PIN: SIZE_PIN,
-    KEY_CODE: KEY_CODE,
+    SizePin: SizePin,
+    KeyCode: KeyCode,
     mapElement: mapElement,
     coordsPinY: coordsPinY,
     coordsPinX: coordsPinX,

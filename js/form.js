@@ -1,13 +1,13 @@
 'use strict';
 
 (function () {
-  var START_COORDS_MAIN_PIN = {
+  var StartCoordsMainPin = {
     X: '570px',
     Y: '375px'
   };
 
   var HALF = 2;
-  var ESC_KEY_CODE = window.util.KEY_CODE.ESC;
+  var ESC_KEY_CODE = window.util.KeyCode.ESC;
   var MIN_PRICE_ELEMENT_ON_LOAD = 1000;
 
   var coordsPinY = window.util.coordsPinY;
@@ -86,8 +86,8 @@
   };
 
   var setStartCoordsPin = function () {
-    mapPinMainElement.style.left = START_COORDS_MAIN_PIN.X;
-    mapPinMainElement.style.top = START_COORDS_MAIN_PIN.Y;
+    mapPinMainElement.style.left = StartCoordsMainPin.X;
+    mapPinMainElement.style.top = StartCoordsMainPin.Y;
   };
 
   var setStartRoomNumber = function () {

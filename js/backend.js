@@ -2,14 +2,14 @@
 
 (function () {
 
-  var ESC_KEY = window.util.KEY_CODE.ESC;
+  var ESC_KEY = window.util.KeyCode.ESC;
 
-  var URL = {
+  var Url = {
     GET: 'https://js.dump.academy/keksobooking/data',
     POST: 'https://js.dump.academy/keksobooking'
   };
 
-  var STATUS = {
+  var Status = {
     SUCCESS: 200,
     SERVER_ERROR: 500
   };
@@ -51,10 +51,10 @@
   var setBehaviourResponse = function (xhr, onSuccess, onError) {
     var checkError = function () {
       switch (xhr.status) {
-        case STATUS.SUCCESS:
+        case Status.SUCCESS:
           onSuccess(xhr.response);
           break;
-        case STATUS.SERVER_ERROR:
+        case Status.SERVER_ERROR:
           onError('Неправильный URL');
           break;
         default:
@@ -76,7 +76,7 @@
     var xhr = new XMLHttpRequest();
     setBehaviourResponse(xhr, onSuccess, onError);
     xhr.responseType = 'json';
-    xhr.open('GET', URL.GET);
+    xhr.open('GET', Url.GET);
     xhr.send();
   };
 
@@ -84,7 +84,7 @@
     var xhr = new XMLHttpRequest();
     setBehaviourResponse(xhr, onSuccess, onError);
     xhr.responseType = 'json';
-    xhr.open('POST', URL.POST);
+    xhr.open('POST', Url.POST);
     xhr.send(data);
   };
 

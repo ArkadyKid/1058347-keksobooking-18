@@ -2,9 +2,9 @@
 
 (function () {
 
-  var ENTER_KEY = window.util.KEY_CODE.ENTER;
+  var ENTER_KEY = window.util.KeyCode.ENTER;
 
-  var LIMITS_PRICE = {
+  var LimitsPrice = {
     MIN: 10000,
     MAX: 50000
   };
@@ -66,11 +66,11 @@
   var getPriceArray = function (el) {
     switch (housingPriceElement.value) {
       case 'middle':
-        return el.offer.price >= LIMITS_PRICE.MIN && el.offer.price <= LIMITS_PRICE.MAX;
+        return el.offer.price >= LimitsPrice.MIN && el.offer.price <= LimitsPrice.MAX;
       case 'low':
-        return el.offer.price < LIMITS_PRICE.MIN;
+        return el.offer.price < LimitsPrice.MIN;
       case 'high':
-        return el.offer.price > LIMITS_PRICE.MAX;
+        return el.offer.price > LimitsPrice.MAX;
       default:
         return housingPriceElement.value === 'any';
     }

@@ -6,16 +6,15 @@
     element.addEventListener('mousedown', function (evt) {
       evt.preventDefault();
 
-      var startCoords = {
-        x: evt.clientX,
-        y: evt.clientY
+      var Coordinates = function (x, y) {
+        this.x = x;
+        this.y = y;
       };
 
+      var startCoords = new Coordinates(evt.clientX, evt.clientY);
+
       var getCoords = function (mouseEvt) {
-        var shift = {
-          x: startCoords.x - mouseEvt.clientX,
-          y: startCoords.y - mouseEvt.clientY
-        };
+        var shift = new Coordinates(startCoords.x - mouseEvt.clientX, startCoords.y - mouseEvt.clientY);
 
         var coordsX = element.offsetLeft - shift.x;
         var coordsY = element.offsetTop - shift.y;
@@ -27,10 +26,7 @@
           bottom: 630
         };
 
-        startCoords = {
-          x: mouseEvt.clientX,
-          y: mouseEvt.clientY
-        };
+        startCoords = new Coordinates(mouseEvt.clientX, mouseEvt.clientY);
 
         if (coordsX < limitsSizeBlock.left) {
           coordsX = limitsSizeBlock.left;

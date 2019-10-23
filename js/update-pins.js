@@ -2,9 +2,9 @@
 
 (function () {
   var MAX_COUNT = 5;
-  var SIZE_PIN = {
-    HALF_WIDTH: window.util.SIZE_PIN.HALF_WIDTH,
-    HEIGHT: window.util.SIZE_PIN.HEIGHT
+  var SizePin = {
+    HALF_WIDTH: window.util.SizePin.HALF_WIDTH,
+    HEIGHT: window.util.SizePin.HEIGHT
   };
 
   var MIN_CHILD_OF = {
@@ -17,14 +17,14 @@
   var mapFiltersElement = window.util.mapElement.querySelector('.map__filters-container');
   var renderCards = window.rendercards.renderCards;
 
-  var renderPins = function (pin) {
+  var renderPins = function (el) {
     var pinElement = pinTemplate.cloneNode(true);
     var pinImgElement = pinElement.querySelector('img');
 
-    pinImgElement.src = pin.author.avatar;
-    pinImgElement.alt = pin.offer.title;
-    pinElement.style.left = pin.location.x - SIZE_PIN.HALF_WIDTH + 'px';
-    pinElement.style.top = pin.location.y - SIZE_PIN.HEIGHT + 'px';
+    pinImgElement.src = el.author.avatar;
+    pinImgElement.alt = el.offer.title;
+    pinElement.style.left = el.location.x - SizePin.HALF_WIDTH + 'px';
+    pinElement.style.top = el.location.y - SizePin.HEIGHT + 'px';
     pinElement.style.display = 'none';
     return pinElement;
   };
