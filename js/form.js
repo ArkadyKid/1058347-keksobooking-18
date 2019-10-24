@@ -156,7 +156,9 @@
   adFormResetElement.addEventListener('click', function (evt) {
     evt.preventDefault();
     adFormElement.reset();
+    mapFiltersElement.reset();
     setStartRoomNumber();
+    setAddressInputValue();
     setStartCoordsPin();
   });
 
