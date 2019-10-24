@@ -26,6 +26,7 @@
 
   var mapPinsElement = window.util.mapElement.querySelector('.map__pins');
   var adFormElement = document.querySelector('.ad-form');
+  var adFormResetElement = adFormElement.querySelector('.ad-form__reset');
   var adFormFieldsetList = adFormElement.querySelectorAll('.ad-form fieldset');
   var mapFiltersElement = window.util.mapElement.querySelector('.map__filters');
   var mapFiltersSelectList = mapFiltersElement.querySelectorAll('.map__filters select');
@@ -152,9 +153,10 @@
     showSuccessBlock();
   };
 
-  adFormElement.addEventListener('reset', function () {
+  adFormResetElement.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    adFormElement.reset();
     setStartCoordsPin();
-    setAddressInputValue();
     setStartRoomNumber();
   });
 
