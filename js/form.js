@@ -156,8 +156,8 @@
   adFormResetElement.addEventListener('click', function (evt) {
     evt.preventDefault();
     adFormElement.reset();
-    setStartCoordsPin();
     setStartRoomNumber();
+    setStartCoordsPin();
   });
 
   adFormElement.addEventListener('submit', function (evt) {
@@ -179,6 +179,8 @@
     addDisabledAttribute: addDisabledAttribute,
     removeDisabledAttribute: removeDisabledAttribute,
     setActiveWindow: setActiveWindow,
-    showPins: showPins
+    showPins: showPins,
+    adFormResetElement: adFormResetElement,
+    adFormElement: adFormElement
   };
 })();

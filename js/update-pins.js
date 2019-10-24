@@ -8,11 +8,12 @@
     HEIGHT: window.util.SizePin.HEIGHT
   };
 
+  var renderCards = window.renderCards.render;
   var mapElement = window.util.mapElement;
+
   var pinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
   var mapPinsElement = window.util.mapElement.querySelector('.map__pins');
   var mapFiltersElement = window.util.mapElement.querySelector('.map__filters-container');
-  var renderCards = window.renderCards.renderCards;
 
   var renderPins = function (el) {
     var pinElement = pinTemplate.cloneNode(true);

@@ -45,7 +45,6 @@
     onChangeInput(inputRoomImgElement, roomImgElement);
   });
 
-
   adFormElement.addEventListener('reset', function () {
     roomImgElement.src = DEFAULT_IMG_URL;
     imgAvatarElement.src = DEFAULT_IMG_URL;

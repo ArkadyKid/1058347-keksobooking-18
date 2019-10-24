@@ -142,6 +142,6 @@
   };
 
   window.renderCards = {
-    renderCards: renderCards
+    render: renderCards
   };
 })();
