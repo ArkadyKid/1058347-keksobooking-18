@@ -10,13 +10,6 @@
     PALACE: 10000
   };
 
-  var Placeholder = {
-    BUNGALO: '0',
-    FLAT: '1000',
-    HOUSE: '5000',
-    PALACE: '10000'
-  };
-
   var GuestCount = {
     PALACE: '100',
     BUNGALO: '1',
@@ -45,19 +38,19 @@
   var checkType = function () {
     switch (typeElement.value) {
       case 'bungalo':
-        priceElement.placeholder = Placeholder.BUNGALO;
+        priceElement.placeholder = MinPriceElement.BUNGALO;
         priceElement.min = MinPriceElement.BUNGALO;
         break;
       case 'flat':
-        priceElement.placeholder = Placeholder.FLAT;
+        priceElement.placeholder = MinPriceElement.FLAT;
         priceElement.min = MinPriceElement.FLAT;
         break;
       case 'house':
-        priceElement.placeholder = Placeholder.HOUSE;
+        priceElement.placeholder = MinPriceElement.HOUSE;
         priceElement.min = MinPriceElement.HOUSE;
         break;
       case 'palace':
-        priceElement.placeholder = Placeholder.PALACE;
+        priceElement.placeholder = MinPriceElement.PALACE;
         priceElement.min = MinPriceElement.PALACE;
         break;
     }
@@ -123,7 +116,7 @@
 
   typeElement.addEventListener('change', checkType);
 
-  priceElement.addEventListener('input', function () {
+  priceElement.addEventListener('change', function () {
     if (priceElement.validity.rangeUnderflow) {
       priceElement.setCustomValidity('минимальная цена ' + priceElement.min + ' руб');
     } else {

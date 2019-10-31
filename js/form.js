@@ -157,8 +157,7 @@
     evt.preventDefault();
     adFormElement.reset();
     mapFiltersElement.reset();
-    setStartRoomNumber();
-    setAddressInputValue();
+    setInactiveWindow();
     setStartCoordsPin();
   });
 

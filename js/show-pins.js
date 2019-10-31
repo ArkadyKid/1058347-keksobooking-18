@@ -40,9 +40,9 @@
   var housingGuestsElement = mapFiltersElement.querySelector('#housing-guests');
   var housingPriceElement = mapFiltersElement.querySelector('#housing-price');
   var housingFeatureElement = mapFiltersElement.querySelector('#housing-features');
-  var featuresArray = Array.from(housingFeatureElement.querySelectorAll('input'));
+  var features = Array.from(housingFeatureElement.querySelectorAll('input'));
 
-  var getFeatureArray = function (el, filteredFeatures) {
+  var getFeature = function (el, filteredFeatures) {
     if (!filteredFeatures.length) {
       return true;
     }
@@ -51,19 +51,19 @@
     });
   };
 
-  var getTypeArray = function (el) {
+  var getType = function (el) {
     return housingTypeElement.value === 'any' || el.offer.type === housingTypeElement.value;
   };
 
-  var getRoomsArray = function (el) {
+  var getRooms = function (el) {
     return housingRoomsElement.value === 'any' || el.offer.rooms === +housingRoomsElement.value;
   };
 
-  var getGuestsArray = function (el) {
+  var getGuests = function (el) {
     return housingGuestsElement.value === 'any' || el.offer.guests === +housingGuestsElement.value;
   };
 
-  var getPriceArray = function (el) {
+  var getPrice = function (el) {
     switch (housingPriceElement.value) {
       case 'middle':
         return el.offer.price >= LimitsPrice.MIN && el.offer.price <= LimitsPrice.MAX;
@@ -76,22 +76,22 @@
     }
   };
 
-  var getFilteredArray = function (el) {
-    var filteredFeatures = featuresArray.filter(function (input) {
+  var getFiltered = function (el) {
+    var filteredFeatures = features.filter(function (input) {
       return input.checked;
     })
       .map(function (input) {
         return input.value;
       });
 
-    return getTypeArray(el) && getRoomsArray(el) && getGuestsArray(el) && getPriceArray(el) && getFeatureArray(el, filteredFeatures);
+    return getType(el) && getRooms(el) && getGuests(el) && getPrice(el) && getFeature(el, filteredFeatures);
   };
 
   var getFilterPins = function () {
-    var filteredArray = pins.filter(function (el) {
-      return getFilteredArray(el);
+    var filtered = pins.filter(function (el) {
+      return getFiltered(el);
     });
-    updatePins(filteredArray);
+    updatePins(filtered);
     showPinAfterFilter();
   };
 

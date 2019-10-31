@@ -54,10 +54,7 @@
 
     for (var i = 0; i < pinsCount; i++) {
       pinFragment.appendChild(renderPins(pins[i]));
-    }
-
-    for (var j = 0; j < pinsCount; j++) {
-      cardFragment.appendChild(renderCards(pins[j]));
+      cardFragment.appendChild(renderCards(pins[i]));
     }
 
     remove.pins();
@@ -65,9 +62,9 @@
     window.util.mapElement.insertBefore(cardFragment, mapFiltersElement);
     mapPinsElement.appendChild(pinFragment);
 
-    for (var l = 0; l < pinsCount; l++) {
-      window.actionCard.show(l);
-      window.actionCard.close(l);
+    for (var j = 0; j < pinsCount; j++) {
+      window.actionCard.show(j);
+      window.actionCard.close(j);
     }
   };
 
