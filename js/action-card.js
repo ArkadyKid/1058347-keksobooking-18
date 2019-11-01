@@ -13,9 +13,9 @@
   var onPopupEscPress = function (evt) {
     var pinList = document.querySelectorAll('.map__pin:not(.map__pin--main');
     if (evt.keyCode === window.util.KeyCode.ESC) {
-      for (var i = 0; i < pinList.length; i++) {
-        addCloseAttribute(i);
-      }
+      pinList.forEach(function (value, index) {
+        addCloseAttribute(index);
+      })
     }
     removeOnEscPress();
   };
@@ -26,10 +26,10 @@
   };
 
   var iteratePopups = function (element, pinElement, popupElement) {
-    for (var i = 0; i < pinElement.length; i++) {
-      addCloseAttribute(i);
-      pinElement[i].classList.remove('map__pin--active');
-    }
+    pinElement.forEach(function (value, index) {
+      addCloseAttribute(index);
+      value.classList.remove('map__pin--active');
+    });
     popupElement[element].style.display = null;
     pinElement[element].classList.add('map__pin--active');
   };
@@ -53,11 +53,12 @@
     var pinList = document.querySelectorAll('.map__pin:not(.map__pin--main');
     var popupCloseList = document.querySelectorAll('.popup__close');
     popupCloseList[element].addEventListener('click', function () {
-      for (var i = 0; i < pinList.length; i++) {
-        addCloseAttribute(i);
-      }
+      pinList.forEach(function (value, index) {
+        addCloseAttribute(index);
+      });
       removeOnEscPress();
     });
+
   };
 
   window.actionCard = {

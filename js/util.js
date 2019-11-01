@@ -24,9 +24,9 @@
   var mainPinHeightCursor = mapPinMainElement.offsetHeight + DIFFERENT_OF_PIN_HEIGHT;
 
   var doIterationCycle = function (elements, doSomething) {
-    for (var i = 0; i < elements.length; i++) {
-      doSomething(elements[i]);
-    }
+    elements.forEach(function (element) {
+      doSomething(element);
+    });
   };
 
   window.util = {

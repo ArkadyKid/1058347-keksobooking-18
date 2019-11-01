@@ -29,9 +29,9 @@
 
   var removeList = function (list, parent) {
     if (list) {
-      for (var m = 0; m < list.length; m++) {
-        parent.removeChild(list[m]);
-      }
+      list.forEach(function (value) {
+        parent.removeChild(value);
+      });
     }
   };
 
@@ -70,9 +70,9 @@
 
   var showPinAfterFilter = function () {
     var pinList = document.querySelectorAll('.map__pin:not(.map__pin--main');
-    for (var k = 0; k < pinList.length; k++) {
-      pinList[k].style.display = null;
-    }
+    pinList.forEach(function (value) {
+      value.style.display = null;
+    })
   };
 
   window.updatePins = {

@@ -52,23 +52,23 @@
 
   var showPins = function () {
     var pinList = document.querySelectorAll('.map__pin:not(.map__pin--main');
-    for (var i = 0; i < pinList.length; i++) {
-      pinList[i].style.display = null;
-    }
+    pinList.forEach(function (value) {
+      value.style.display = null;
+    })
   };
 
   var hidePins = function () {
     var pinList = document.querySelectorAll('.map__pin:not(.map__pin--main');
-    for (var i = 0; i < pinList.length; i++) {
-      pinList[i].style.display = 'none';
-    }
+    pinList.forEach(function (value) {
+      value.style.display = 'none';
+    })
   };
 
   var hidePopups = function () {
     var popupList = document.querySelectorAll('.popup');
-    for (var i = 0; i < popupList.length; i++) {
-      popupList[i].style.display = 'none';
-    }
+    popupList.forEach(function (value) {
+      value.style.display = 'none';
+    })
   };
 
   var setStartRoomNumber = function () {

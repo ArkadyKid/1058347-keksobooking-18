@@ -43,34 +43,34 @@
       var popupFeatureConditionerElement = cardElement.querySelector('.popup__feature--conditioner');
 
       var hidePopups = function () {
-        for (var j = 0; j < popupFeatureList.length; j++) {
-          popupFeatureList[j].style.display = 'none';
-        }
+        popupFeatureList.forEach(function (value) {
+          value.style.display = 'none';
+        });
       };
 
       var checkFeature = function () {
-        for (var i = 0; i < card.offer.features.length; i++) {
-          switch (card.offer.features[i]) {
-            case 'wifi':
-              popupFeatureWifiElement.style.display = null;
-              break;
-            case 'dishwasher':
-              popupFeatureDishwasherElement.style.display = null;
-              break;
-            case 'parking':
-              popupFeatureParkingElement.style.display = null;
-              break;
-            case 'washer':
-              popupFeatureWasherElement.style.display = null;
-              break;
-            case 'elevator':
-              popupFeatureElevatorElement.style.display = null;
-              break;
-            case 'conditioner':
-              popupFeatureConditionerElement.style.display = null;
-              break;
-          }
-        }
+          card.offer.features.forEach(function (value) {
+            switch (value) {
+              case 'wifi':
+                popupFeatureWifiElement.style.display = null;
+                break;
+              case 'dishwasher':
+                popupFeatureDishwasherElement.style.display = null;
+                break;
+              case 'parking':
+                popupFeatureParkingElement.style.display = null;
+                break;
+              case 'washer':
+                popupFeatureWasherElement.style.display = null;
+                break;
+              case 'elevator':
+                popupFeatureElevatorElement.style.display = null;
+                break;
+              case 'conditioner':
+                popupFeatureConditionerElement.style.display = null;
+                break;
+            }
+          });
       };
 
       if (card.offer.features.length !== 0) {

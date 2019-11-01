@@ -83,7 +83,6 @@
       .map(function (input) {
         return input.value;
       });
-
     return getType(element) && getRooms(element) && getGuests(element) && getPrice(element) && getFeature(element, filteredFeatures);
   };
 
@@ -95,9 +94,9 @@
     showPinAfterFilter();
   };
 
-  load(successHandler, errorHandler);
   mapFiltersElement.addEventListener('input', debounce(getFilterPins));
   mapFiltersElement.addEventListener('reset', function () {
+    load(successHandler, errorHandler);
     updatePins(pins);
   });
 })();
