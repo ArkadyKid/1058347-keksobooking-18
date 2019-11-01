@@ -49,28 +49,28 @@
       };
 
       var checkFeature = function () {
-          card.offer.features.forEach(function (value) {
-            switch (value) {
-              case 'wifi':
-                popupFeatureWifiElement.style.display = null;
-                break;
-              case 'dishwasher':
-                popupFeatureDishwasherElement.style.display = null;
-                break;
-              case 'parking':
-                popupFeatureParkingElement.style.display = null;
-                break;
-              case 'washer':
-                popupFeatureWasherElement.style.display = null;
-                break;
-              case 'elevator':
-                popupFeatureElevatorElement.style.display = null;
-                break;
-              case 'conditioner':
-                popupFeatureConditionerElement.style.display = null;
-                break;
-            }
-          });
+        card.offer.features.forEach(function (value) {
+          switch (value) {
+            case 'wifi':
+              popupFeatureWifiElement.style.display = null;
+              break;
+            case 'dishwasher':
+              popupFeatureDishwasherElement.style.display = null;
+              break;
+            case 'parking':
+              popupFeatureParkingElement.style.display = null;
+              break;
+            case 'washer':
+              popupFeatureWasherElement.style.display = null;
+              break;
+            case 'elevator':
+              popupFeatureElevatorElement.style.display = null;
+              break;
+            case 'conditioner':
+              popupFeatureConditionerElement.style.display = null;
+              break;
+          }
+        });
       };
 
       if (card.offer.features.length !== 0) {
@@ -87,9 +87,11 @@
         for (var k = 0; k < card.offer.photos.length; k++) {
           var popupPhotoCloneElement = popupPhotoElement.cloneNode();
           popupPhotosElement.appendChild(popupPhotoCloneElement);
-          var popupPhotoList = cardElement.querySelectorAll('.popup__photo');
-          popupPhotoList[k].src = card.offer.photos[k];
         }
+        var popupPhotoList = cardElement.querySelectorAll('.popup__photo');
+        popupPhotoList.forEach(function (value, index) {
+          value.src = card.offer.photos[index];
+        });
       };
       if (card.offer.photos.length !== 0) {
         checkPhotos();

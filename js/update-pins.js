@@ -72,7 +72,7 @@
     var pinList = document.querySelectorAll('.map__pin:not(.map__pin--main');
     pinList.forEach(function (value) {
       value.style.display = null;
-    })
+    });
   };
 
   window.updatePins = {

@@ -15,7 +15,7 @@
     if (evt.keyCode === window.util.KeyCode.ESC) {
       pinList.forEach(function (value, index) {
         addCloseAttribute(index);
-      })
+      });
     }
     removeOnEscPress();
   };

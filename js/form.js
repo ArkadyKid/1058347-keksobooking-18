@@ -54,21 +54,21 @@
     var pinList = document.querySelectorAll('.map__pin:not(.map__pin--main');
     pinList.forEach(function (value) {
       value.style.display = null;
-    })
+    });
   };
 
   var hidePins = function () {
     var pinList = document.querySelectorAll('.map__pin:not(.map__pin--main');
     pinList.forEach(function (value) {
       value.style.display = 'none';
-    })
+    });
   };
 
   var hidePopups = function () {
     var popupList = document.querySelectorAll('.popup');
     popupList.forEach(function (value) {
       value.style.display = 'none';
-    })
+    });
   };
 
   var setStartRoomNumber = function () {
@@ -156,7 +156,6 @@
   adFormResetElement.addEventListener('click', function (evt) {
     evt.preventDefault();
     adFormElement.reset();
-    mapFiltersElement.reset();
     setInactiveWindow();
     setStartCoordsPin();
   });
