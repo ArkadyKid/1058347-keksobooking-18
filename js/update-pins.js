@@ -15,14 +15,14 @@
   var mapPinsElement = window.util.mapElement.querySelector('.map__pins');
   var mapFiltersElement = window.util.mapElement.querySelector('.map__filters-container');
 
-  var renderPins = function (el) {
+  var renderPins = function (element) {
     var pinElement = pinTemplate.cloneNode(true);
     var pinImgElement = pinElement.querySelector('img');
 
-    pinImgElement.src = el.author.avatar;
-    pinImgElement.alt = el.offer.title;
-    pinElement.style.left = el.location.x - SizePin.HALF_WIDTH + 'px';
-    pinElement.style.top = el.location.y - SizePin.HEIGHT + 'px';
+    pinImgElement.src = element.author.avatar;
+    pinImgElement.alt = element.offer.title;
+    pinElement.style.left = element.location.x - SizePin.HALF_WIDTH + 'px';
+    pinElement.style.top = element.location.y - SizePin.HEIGHT + 'px';
     pinElement.style.display = 'none';
     return pinElement;
   };

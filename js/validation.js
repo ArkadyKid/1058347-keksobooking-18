@@ -116,7 +116,7 @@
 
   typeElement.addEventListener('change', checkType);
 
-  priceElement.addEventListener('change', function () {
+  priceElement.addEventListener('invalid', function () {
     if (priceElement.validity.rangeUnderflow) {
       priceElement.setCustomValidity('минимальная цена ' + priceElement.min + ' руб');
     } else {
