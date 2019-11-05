@@ -71,11 +71,12 @@
     xhr.timeout = TIMEOUT;
   };
 
-  var load = function (onSuccess, onError) {
+  var load = function (onSuccess, onError, onLoad) {
     var xhr = new XMLHttpRequest();
     setBehaviourResponse(xhr, onSuccess, onError);
     xhr.responseType = 'json';
     xhr.open('GET', Url.GET);
+    xhr.onload = onLoad;
     xhr.send();
   };
 

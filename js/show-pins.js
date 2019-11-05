@@ -21,20 +21,12 @@
   var successHandler = function (data) {
     pins = data;
     updatePins(pins);
-    mapPinMainElement.addEventListener('mousedown', function () {
-      setActiveWindow();
-    });
-
-    mapPinMainElement.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ENTER_KEY) {
-        setActiveWindow();
-      }
-    });
   };
 
   var showPinAfterFilter = window.updatePins.showPinAfterFilter;
 
-  var mapFiltersElement = document.querySelector('.map__filters');
+  var mapElement = document.querySelector('.map');
+  var mapFiltersElement = mapElement.querySelector('.map__filters');
   var housingTypeElement = mapFiltersElement.querySelector('#housing-type');
   var housingRoomsElement = mapFiltersElement.querySelector('#housing-rooms');
   var housingGuestsElement = mapFiltersElement.querySelector('#housing-guests');
@@ -42,12 +34,12 @@
   var housingFeatureElement = mapFiltersElement.querySelector('#housing-features');
   var features = Array.from(housingFeatureElement.querySelectorAll('input'));
 
-  var getFeature = function (el, filteredFeatures) {
+  var getFeature = function (element, filteredFeatures) {
     if (!filteredFeatures.length) {
       return true;
     }
     return filteredFeatures.every(function (feature) {
-      return el.offer.features.includes(feature);
+      return element.offer.features.includes(feature);
     });
   };
 
@@ -94,9 +86,20 @@
     showPinAfterFilter();
   };
 
+  mapPinMainElement.addEventListener('mousedown', function () {
+    if (mapElement.classList.contains('map--faded')) {
+      load(successHandler, errorHandler, setActiveWindow);
+    }
+  });
+
+  mapPinMainElement.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_KEY && mapElement.classList.contains('map--faded')) {
+      load(successHandler, errorHandler, setActiveWindow);
+    }
+  });
+
   mapFiltersElement.addEventListener('input', debounce(getFilterPins));
   mapFiltersElement.addEventListener('reset', function () {
-    load(successHandler, errorHandler);
     updatePins(pins);
   });
 })();
